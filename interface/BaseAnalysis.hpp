@@ -9,8 +9,9 @@ class BaseAnalysis{
 public:
 	BaseAnalysis(){};
 	~BaseAnalysis(){};
-	virtual inline void Init(Looper*l1) { l = l1 ; };
+	virtual void Init(Looper*l1); // { l = l1 ; };
 	virtual void Loop();
+	virtual void AnalyzeEvent();
 };
 
 #include "interface/Looper.hpp"

@@ -17,14 +17,27 @@ protected:
 	TTree *fChain;	
 	tree out;
 
-	string chainName;
-	string outFileName;
 	void SetBranchesH4tree();
 	void SetBranchesOuttree();
 	void SetBranchesCommon();
 	map<string,bool> activeBranches;	
 	bool isActive(string name);
+	// ---------
+	void SetBranchAddress(string name,unsigned long long* ptr);
+	void SetBranchAddress(string name,unsigned int* ptr);
+	void SetBranchAddress(string name,int* ptr);
+	void SetBranchAddress(string name,float* ptr);
+	void SetBranchAddress(string name,double* ptr);
+
+	void SetBranchAddress(string name,vector<float>** 	ptr);
+	void SetBranchAddress(string name,vector<double>** 	ptr);
+	void SetBranchAddress(string name,vector<unsigned int>** ptr);
+	void SetBranchAddress(string name,vector<int>** 	ptr);
+	void SetBranchAddress(string name,vector<bool>** 	ptr);
+	void SetBranchAddress(string name,vector<unsigned long long>** ptr);
 public:
+	string chainName;
+	string outFileName;
 	Filler(){};
 	~Filler(){};
 	void Init();
@@ -33,16 +46,7 @@ public:
 	void SetBranchAddress();
 	//template<class T>
 	//void SetBranchAddress(string name,T ptr);
-	void SetBranchAddress(string name,ULong64_t* ptr);
-	void SetBranchAddress(string name,UInt_t* ptr);
-	void SetBranchAddress(string name,Int_t* ptr);
-	void SetBranchAddress(string name,Float_t* ptr);
-	void SetBranchAddress(string name,Double_t* ptr);
-	void SetBranchAddress(string name,vector<Float_t>** ptr);
-	void SetBranchAddress(string name,vector<UInt_t>** ptr);
-	void SetBranchAddress(string name,vector<Int_t>** ptr);
-	void SetBranchAddress(string name,vector<bool>** ptr);
-	void SetBranchAddress(string name,vector<ULong64_t>** ptr);
+
 	inline void Fill( ){ fChain->Fill() ;};
 
 };

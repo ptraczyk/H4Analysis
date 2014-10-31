@@ -3,22 +3,28 @@
 #include "interface/Filler.hpp"
 // -------------------------- TEMPLATE SPECIFICATION ----------- 
 // --- VECTOR ----
-void Filler::SetBranchAddress(string name, vector<UInt_t>** ptr)
+void Filler::SetBranchAddress(string name, vector<unsigned int>** ptr)
 {
 	if (!isActive(name) ) return;
-	fChain->Branch(name.c_str(),"vector<UInt_t>",ptr);	
+	fChain->Branch(name.c_str(),"vector<unsigned int>",ptr);	
 	out.isFilled[name]=1;
 }
-void Filler::SetBranchAddress(string name, vector<Int_t>** ptr)
+void Filler::SetBranchAddress(string name, vector<int>** ptr)
 {
 	if (!isActive(name) ) return;
-	fChain->Branch(name.c_str(),"vector<Int_t>",ptr);	
+	fChain->Branch(name.c_str(),"vector<int>",ptr);	
 	out.isFilled[name]=1;
 }
-void Filler::SetBranchAddress(string name, vector<Float_t>** ptr)
+void Filler::SetBranchAddress(string name, vector<float>** ptr)
 {
 	if (!isActive(name) ) return;
-	fChain->Branch(name.c_str(),"vector<Float_t>",ptr);	
+	fChain->Branch(name.c_str(),"vector<float>",ptr);	
+	out.isFilled[name]=1;
+}
+void Filler::SetBranchAddress(string name, vector<double>** ptr)
+{
+	if (!isActive(name) ) return;
+	fChain->Branch(name.c_str(),"vector<double>",ptr);	
 	out.isFilled[name]=1;
 }
 void Filler::SetBranchAddress(string name, vector<bool>** ptr)
@@ -27,38 +33,38 @@ void Filler::SetBranchAddress(string name, vector<bool>** ptr)
 	fChain->Branch(name.c_str(),"vector<bool>",ptr);	
 	out.isFilled[name]=1;
 }
-void Filler::SetBranchAddress(string name, vector<ULong64_t>** ptr)
+void Filler::SetBranchAddress(string name, vector<unsigned long long>** ptr)
 {
 	if (!isActive(name) ) return;
-	fChain->Branch(name.c_str(),"vector<ULong64_t>",ptr);
+	fChain->Branch(name.c_str(),"vector<unsigned long long>",ptr);
 	out.isFilled[name]=1;
 }
 // ---- VALUES ---
-void Filler::SetBranchAddress(string name, UInt_t* ptr)
+void Filler::SetBranchAddress(string name, unsigned int* ptr)
 {
 	if (!isActive(name) ) return;
 	fChain->Branch(Form("%s/i",name.c_str()),ptr);	
 	out.isFilled[name]=1;
 }
-void Filler::SetBranchAddress(string name, ULong64_t* ptr)
+void Filler::SetBranchAddress(string name, unsigned long long* ptr)
 {
 	if (!isActive(name) ) return;
 	fChain->Branch(Form("%s/l",name.c_str()),ptr);	
 	out.isFilled[name]=1;
 }
-void Filler::SetBranchAddress(string name, Int_t* ptr)
+void Filler::SetBranchAddress(string name, int* ptr)
 {
 	if (!isActive(name) ) return;
 	fChain->Branch(Form("%s/I",name.c_str()),ptr);	
 	out.isFilled[name]=1;
 }
-void Filler::SetBranchAddress(string name, Float_t* ptr)
+void Filler::SetBranchAddress(string name, float* ptr)
 {
 	if (!isActive(name) ) return;
 	fChain->Branch(Form("%s/F",name.c_str()),ptr);	
 	out.isFilled[name]=1;
 }
-void Filler::SetBranchAddress(string name, Double_t* ptr)
+void Filler::SetBranchAddress(string name, double* ptr)
 {
 	if (!isActive(name) ) return;
 	fChain->Branch(Form("%s/D",name.c_str()),ptr);	

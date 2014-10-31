@@ -80,12 +80,12 @@ info:
 	@echo "--------------------------"
 	@echo "DEBUG:"
 
-$(StatLib): $(BINOBJ)
-	ar rcs $@ $(BINOBJ)
+$(StatLib): $(BINOBJ) $(Dict)
+	ar rcs $@ $(BINOBJ) $(Dict)
 .PHONY: soLib
 soLib: $(SoLib)
 
-$(SoLib): $(StatLib) $(Dict)
+$(SoLib): $(StatLib)
 	$(LD) $(LDFLAGS) $(SOFLAGS) -o $@ $^
 
 .PHONY: $(Packages) 
