@@ -22,7 +22,7 @@ Packages=$(patsubst test/%.$(SrcSuf),%,$(CppTestFiles) )
 CppSrcFiles=$(wildcard src/*.$(SrcSuf))
 Objects=$(patsubst src/%.$(SrcSuf),%,$(CppSrcFiles))
 
-LibName		=H4DAQ
+LibName		=H4Analysis
 
 ### ----- OPTIONS ABOVE ----- ####
 
@@ -31,9 +31,12 @@ InfoLine = compiling $(1)
 
 BASEDIR=$(shell pwd)
 BINDIR=$(BASEDIR)/bin
+DICTDIR=$(BASEDIR)/dict
+LINKDIR=$(BASEDIR)/LinkDef
 SRCDIR = $(BASEDIR)/src
 HDIR = $(BASEDIR)/interface
 
+Dict=$(patsubst src/%.$(SrcSuf),$(BASEDIR)/dict/%_Dict.$(ObjSuf),$(CppSrcFiles))
 ### Main Target, first
 .PHONY: all
 all: all2
@@ -50,8 +53,8 @@ all2: info $(Packages) | $(BINDIR)
 BINOBJ	=$(patsubst %,$(BINDIR)/%.$(ObjSuf),$(Objects) )
 SRCFILES=$(patsubst %,$(SRCDIR)/%.$(SrcSuf),$(Objects) )
 HFILES	=$(patsubst %,$(HDIR)/%.$(HeadSuf),$(Objects) )
-StatLib		=$(BINDIR)/H4DAQ.$(StatSuf)
-SoLib		=$(BINDIR)/H4DAQ.$(DllSuf)
+StatLib		=$(BINDIR)/$(LibName).$(StatSuf)
+SoLib		=$(BINDIR)/$(LibName).$(DllSuf)
 
 .PRECIOUS:*.ObjSuf *.DepSuf *.DllSuf
 
@@ -61,12 +64,15 @@ Deps=$(patsubst %,$(BINDIR)/%.$(DepSuf),$(Objects) $(Packages) )
 
 $(BINDIR):
 	mkdir -p $(BINDIR)
+$(DICTDIR):
+	mkdir -p $(DICTDIR)
 
 info:
 	@echo "--------------------------"
 	@echo "Compile on $(shell hostname)"
 	@echo "Packages are: $(Packages)"
 	@echo "Objects are: $(Objects)"
+	@echo "Dict are: $(Dict)"
 	@echo "--------------------------"
 	@echo "DEBUG:"
 
@@ -75,7 +81,7 @@ $(StatLib): $(BINOBJ)
 .PHONY: soLib
 soLib: $(SoLib)
 
-$(SoLib): $(StatLib)
+$(SoLib): $(StatLib) $(Dict)
 	$(LD) $(LDFLAGS) $(SOFLAGS) -o $@ $^
 
 .PHONY: $(Packages) 
@@ -100,6 +106,7 @@ clean:
 	-rm -v bin/*.$(DllSuf)
 	-rm -v bin/*.$(DepSuf)
 	-rm -v bin/*.$(StatSuf)
+	-rm -v dict/*
 	-rm -v $(addprefix $(BINDIR)/,$(Packages))
 
 
@@ -121,6 +128,14 @@ $(BINDIR)/%.$(DepSuf): $(SRCDIR)/%.$(SrcSuf) $(HDIR)/%.$(HeadSuf)
 	$(CXX) $(CXXFLAGS) $(LDFLAGS) -M -o $@ $(SRCDIR)/$*.$(SrcSuf) -I$(INC_DIR) -I$(HDIR)
 	sed -i'' "s|^.*:|& Makefile $(BINDIR)/&|g" $@
 
+$(DICTDIR)/%_Dict.cc:  $(SRCDIR)/%.$(SrcSuf) $(HDIR)/%.$(HeadSuf) | $(DICTDIR)
+	@echo $(call InfoLine , $@ )
+	@rootcint -v4 -f $@ -c $(CXXFLAGS)  $(HDIR)/$*.$(HeadSuf)  $(LINKDIR)/$*LinkDef.h
+
+$(DICTDIR)/%_Dict.o:  $(DICTDIR)/%_Dict.cc
+	@echo $(call InfoLine , $@ )
+	$(CXX) -c -o $(DICTDIR)/$*_Dict.o $(DICTDIR)/$*_Dict.cc $(LDFLAGS) $(CXXFLAGS)
+	
 #-include $(Deps)
 #	%.d: %.c
 #		$(SHELL) -ec '$(CC) -M \

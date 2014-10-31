@@ -1,0 +1,13 @@
+####### MAIN #########
+# inform the program about the HV in the event
+HV=600,700,900
+
+# inform which energy scans where taken for the Fixed HV
+ENERGIES=10,20,50,100;10,20,50,100;10,20,50,100
+
+# inform which are the pedestal runs for the HV Scans. Comma separated. Semicol for HV
+PEDESTAL=516;10;10
+
+######## HV Scans  ###########
+
+
