@@ -1,4 +1,71 @@
+#define FILLER_CPP
+
 #include "interface/Filler.hpp"
+// -------------------------- TEMPLATE SPECIFICATION ----------- 
+// --- VECTOR ----
+void Filler::SetBranchAddress(string name, vector<UInt_t>** ptr)
+{
+	if (!isActive(name) ) return;
+	fChain->Branch(name.c_str(),"vector<UInt_t>",ptr);	
+	out.isFilled[name]=1;
+}
+void Filler::SetBranchAddress(string name, vector<Int_t>** ptr)
+{
+	if (!isActive(name) ) return;
+	fChain->Branch(name.c_str(),"vector<Int_t>",ptr);	
+	out.isFilled[name]=1;
+}
+void Filler::SetBranchAddress(string name, vector<Float_t>** ptr)
+{
+	if (!isActive(name) ) return;
+	fChain->Branch(name.c_str(),"vector<Float_t>",ptr);	
+	out.isFilled[name]=1;
+}
+void Filler::SetBranchAddress(string name, vector<bool>** ptr)
+{
+	if (!isActive(name) ) return;
+	fChain->Branch(name.c_str(),"vector<bool>",ptr);	
+	out.isFilled[name]=1;
+}
+void Filler::SetBranchAddress(string name, vector<ULong64_t>** ptr)
+{
+	if (!isActive(name) ) return;
+	fChain->Branch(name.c_str(),"vector<ULong64_t>",ptr);
+	out.isFilled[name]=1;
+}
+// ---- VALUES ---
+void Filler::SetBranchAddress(string name, UInt_t* ptr)
+{
+	if (!isActive(name) ) return;
+	fChain->Branch(Form("%s/i",name.c_str()),ptr);	
+	out.isFilled[name]=1;
+}
+void Filler::SetBranchAddress(string name, ULong64_t* ptr)
+{
+	if (!isActive(name) ) return;
+	fChain->Branch(Form("%s/l",name.c_str()),ptr);	
+	out.isFilled[name]=1;
+}
+void Filler::SetBranchAddress(string name, Int_t* ptr)
+{
+	if (!isActive(name) ) return;
+	fChain->Branch(Form("%s/I",name.c_str()),ptr);	
+	out.isFilled[name]=1;
+}
+void Filler::SetBranchAddress(string name, Float_t* ptr)
+{
+	if (!isActive(name) ) return;
+	fChain->Branch(Form("%s/F",name.c_str()),ptr);	
+	out.isFilled[name]=1;
+}
+void Filler::SetBranchAddress(string name, Double_t* ptr)
+{
+	if (!isActive(name) ) return;
+	fChain->Branch(Form("%s/D",name.c_str()),ptr);	
+	out.isFilled[name]=1;
+}
+// ------------------------------------------------------------- 
+
 void Filler::Init()
 {
 	fOut=TFile::Open(outFileName.c_str(),"RECREATE");
@@ -93,3 +160,12 @@ void Filler::SetBranchesOuttree(){
 	SetBranchAddress("HODOY1",&out.HODOY1   );
 	SetBranchAddress("HODOY2",&out.HODOY2   );
 }
+
+bool Filler::isActive(string name)
+{
+	map<string,bool>::iterator it;
+	it=activeBranches.find(name);
+	if (it == activeBranches.end() ) return false;
+	else return activeBranches[name];
+}
+

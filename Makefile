@@ -1,7 +1,8 @@
 INC_DIR = ./
 CXX		=g++
 LD		=g++
-CXXFLAGS	=-O2 -ggdb -std=gnu++0x -Wall
+CXXFLAGS	=-O2 -ggdb -std=gnu++0x -Wall -fPIC
+CXXFLAGSLINKDEF	=-fPIC
 LDFLAGS		=-lz -lm
 SOFLAGS		=-fPIC -shared 
 SHELL		=bash
@@ -37,6 +38,8 @@ SRCDIR = $(BASEDIR)/src
 HDIR = $(BASEDIR)/interface
 
 Dict=$(patsubst src/%.$(SrcSuf),$(BASEDIR)/dict/%_Dict.$(ObjSuf),$(CppSrcFiles))
+CXXFLAGS += "-I$(BASEDIR)"
+CXXFLAGSLINKDEF += "-I$(BASEDIR)"
 ### Main Target, first
 .PHONY: all
 all: all2
@@ -44,6 +47,7 @@ all: all2
 ######### ROOT
 #include make/Makefile.ROOT
 CXXFLAGS += `root-config --cflags`
+CXXFLAGSLINKDEF += `root-config --cflags`
 LDFLAGS += `root-config --libs`
 
 #wait to update Packages in NO_xxx
@@ -130,11 +134,11 @@ $(BINDIR)/%.$(DepSuf): $(SRCDIR)/%.$(SrcSuf) $(HDIR)/%.$(HeadSuf)
 
 $(DICTDIR)/%_Dict.cc:  $(SRCDIR)/%.$(SrcSuf) $(HDIR)/%.$(HeadSuf) | $(DICTDIR)
 	@echo $(call InfoLine , $@ )
-	@rootcint -v4 -f $@ -c $(CXXFLAGS)  $(HDIR)/$*.$(HeadSuf)  $(LINKDIR)/$*LinkDef.h
+	cd $(DICTDIR) && rootcint -v4 -f $@ -c $(CXXFLAGSLINKDEF)  $(HDIR)/$*.$(HeadSuf) $(LINKDIR)/$*LinkDef.hpp
 
 $(DICTDIR)/%_Dict.o:  $(DICTDIR)/%_Dict.cc
 	@echo $(call InfoLine , $@ )
-	$(CXX) -c -o $(DICTDIR)/$*_Dict.o $(DICTDIR)/$*_Dict.cc $(LDFLAGS) $(CXXFLAGS)
+	cd $(DICTDIR) && $(CXX) -c -o $(DICTDIR)/$*_Dict.o $(DICTDIR)/$*_Dict.cc $(LDFLAGS) $(CXXFLAGS)
 	
 #-include $(Deps)
 #	%.d: %.c

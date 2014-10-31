@@ -13,6 +13,8 @@ class LoopAndFill:
 	template<class T> 
 	void CopyVector(vector<T> *src,vector<T>*dest);
 public:
+	LoopAndFill(){};
+	~LoopAndFill(){};
 	void Init();
 	void Close();
 	void Fill();

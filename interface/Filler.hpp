@@ -25,83 +25,35 @@ protected:
 	map<string,bool> activeBranches;	
 	bool isActive(string name);
 public:
+	Filler(){};
+	~Filler(){};
 	void Init();
 	void Close();
 	void SetBranches(); // DO NOT PUT THIS VIRTUAL
 	void SetBranchAddress();
-	template<class T>
-	void SetBranchAddress(string name,T ptr);
+	//template<class T>
+	//void SetBranchAddress(string name,T ptr);
+	void SetBranchAddress(string name,ULong64_t* ptr);
+	void SetBranchAddress(string name,UInt_t* ptr);
+	void SetBranchAddress(string name,Int_t* ptr);
+	void SetBranchAddress(string name,Float_t* ptr);
+	void SetBranchAddress(string name,Double_t* ptr);
+	void SetBranchAddress(string name,vector<Float_t>** ptr);
+	void SetBranchAddress(string name,vector<UInt_t>** ptr);
+	void SetBranchAddress(string name,vector<Int_t>** ptr);
+	void SetBranchAddress(string name,vector<bool>** ptr);
+	void SetBranchAddress(string name,vector<ULong64_t>** ptr);
 	inline void Fill( ){ fChain->Fill() ;};
 
 };
 
-bool Filler::isActive(string name)
-{
-	map<string,bool>::iterator it;
-	it=activeBranches.find(name);
-	if (it == activeBranches.end() ) return false;
-	else return activeBranches[name];
-}
-
-// -------------------------- TEMPLATE SPECIFICATION ----------- 
-// --- VECTOR ----
-template<>
-void Filler::SetBranchAddress(string name, vector<UInt_t>** ptr)
-{
-	if (!isActive(name) ) return;
-	fChain->Branch(name.c_str(),"vector<UInt_t>",ptr);	
-	out.isFilled[name]=1;
-}
-template<>
-void Filler::SetBranchAddress(string name, vector<Int_t>** ptr)
-{
-	if (!isActive(name) ) return;
-	fChain->Branch(name.c_str(),"vector<Int_t>",ptr);	
-	out.isFilled[name]=1;
-}
-template<>
-void Filler::SetBranchAddress(string name, vector<Float_t>** ptr)
-{
-	if (!isActive(name) ) return;
-	fChain->Branch(name.c_str(),"vector<Float_t>",ptr);	
-	out.isFilled[name]=1;
-}
-// ---- VALUES ---
-template<>
-void Filler::SetBranchAddress(string name, UInt_t* ptr)
-{
-	if (!isActive(name) ) return;
-	fChain->Branch(Form("%s/i",name.c_str()),ptr);	
-	out.isFilled[name]=1;
-}
-template<>
-void Filler::SetBranchAddress(string name, Int_t* ptr)
-{
-	if (!isActive(name) ) return;
-	fChain->Branch(Form("%s/I",name.c_str()),ptr);	
-	out.isFilled[name]=1;
-}
-template<>
-void Filler::SetBranchAddress(string name, Float_t* ptr)
-{
-	if (!isActive(name) ) return;
-	fChain->Branch(Form("%s/F",name.c_str()),ptr);	
-	out.isFilled[name]=1;
-}
-template<>
-void Filler::SetBranchAddress(string name, Double_t* ptr)
-{
-	if (!isActive(name) ) return;
-	fChain->Branch(Form("%s/D",name.c_str()),ptr);	
-	out.isFilled[name]=1;
-}
-/// ---------- GENERIC
-template<class T>
-void Filler::SetBranchAddress(string name,T ptr)
-{
-  cout<<"[Filler]::[ERROR]: Unable to handle Branch "<<name<<endl;
-  assert(0);
-}
-
+// --- #ifndef FILLER_CPP
+// --- template<class T>
+// --- void SetBranchAddress(string name,T ptr);
+// --- 	{
+// ---   	cout<<"[Filler]::[ERROR]: Unable to handle Branch "<<name<<endl;
+// ---  	assert(0);
+// --- 	};
+// --- #endif
 
 #endif
