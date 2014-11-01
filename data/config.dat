@@ -10,4 +10,10 @@ PEDESTAL=516;10;10
 
 ######## HV Scans  ###########
 
+######## Input Files #######
+InputFiles=516/1.root,516/2.root
+######## Output File #######
+OutputFile=output.root
+####### Analysis #######
+Analysis=BaseAnalysis
 

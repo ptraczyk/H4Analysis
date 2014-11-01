@@ -76,7 +76,7 @@ void Filler::Init()
 {
 	//fOut=TFile::Open(outFileName.c_str(),"RECREATE");
 	OutFile::Init();
-	fChain=new TChain(chainName.c_str());
+	fChain=new TChain(outTreeName.c_str());
 	SetBranches();
 }
 

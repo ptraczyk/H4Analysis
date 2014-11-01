@@ -14,7 +14,7 @@ void Looper::Init()
 
 void Looper::SetBranches(string tree)
 {
-	if ( !activeBranches.empty() )
+	if ( !inputBranches.empty() )
 		{
 		// disable all the branches
 		fChain->SetBranchStatus("*",0);

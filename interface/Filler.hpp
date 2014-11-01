@@ -21,7 +21,6 @@ protected:
 	void SetBranchesH4tree();
 	void SetBranchesOuttree();
 	void SetBranchesCommon();
-	map<string,bool> activeBranches;	
 	bool isActive(string name);
 	// ---------
 	void SetBranchAddress(string name,unsigned long long* ptr);
@@ -37,7 +36,8 @@ protected:
 	void SetBranchAddress(string name,vector<bool>** 	ptr);
 	void SetBranchAddress(string name,vector<unsigned long long>** ptr);
 public:
-	string chainName;
+	string outTreeName;
+	map<string,bool> activeBranches;	
 	Filler(){};
 	~Filler(){};
 	void Init();
