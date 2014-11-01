@@ -3,10 +3,12 @@
 
 #include "interface/Looper.hpp"
 #include "interface/Filler.hpp"
+#include "interface/Histos.hpp"
 
 class LoopAndFill: 
-	public Looper,
-	public Filler
+	virtual public Looper,
+	virtual public Filler,
+	virtual public Histos
 {
 	template<class T> 
 	void CopyArray(T* src,T*dest,int n);

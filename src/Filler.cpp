@@ -74,14 +74,15 @@ void Filler::SetBranchAddress(string name, double* ptr)
 
 void Filler::Init()
 {
-	fOut=TFile::Open(outFileName.c_str(),"RECREATE");
+	//fOut=TFile::Open(outFileName.c_str(),"RECREATE");
+	OutFile::Init();
 	fChain=new TChain(chainName.c_str());
 	SetBranches();
 }
 
-void Filler::Close(){
+void Filler::Write(){
 	fChain->Write();
-	fOut->Close();
+	//fOut->Close();
 }
 
 void Filler::SetBranches()

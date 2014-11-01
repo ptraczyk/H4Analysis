@@ -10,9 +10,7 @@
 using namespace std;
 
 
-class Looper : 
-	virtual public tree 
-{
+class Looper : public tree {
 friend class BaseAnalysis;
 
 private:

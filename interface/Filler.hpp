@@ -7,13 +7,14 @@
 #include <iostream>
 #include "interface/Event.hpp"
 #include <assert.h>
+#include "interface/OutFile.hpp"
+
 using namespace std;
 
-class Filler { // if I inheriths from tree: diamond of deaths
+class Filler :public virtual OutFile { 
 friend class BaseAnalysis;
 
 protected:
-	TFile *fOut;
 	TTree *fChain;	
 	tree out;
 
@@ -37,11 +38,10 @@ protected:
 	void SetBranchAddress(string name,vector<unsigned long long>** ptr);
 public:
 	string chainName;
-	string outFileName;
 	Filler(){};
 	~Filler(){};
 	void Init();
-	void Close();
+	void Write();
 	void SetBranches(); // DO NOT PUT THIS VIRTUAL
 	void SetBranchAddress();
 	//template<class T>
