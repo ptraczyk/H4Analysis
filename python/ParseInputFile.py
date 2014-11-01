@@ -4,6 +4,12 @@ def ParseInputFile(fileName):
 	for line in f:
 		l2=line.split('#')[0]
 		parts=l2.split('=');
+		#INCLUDE
+		if parts[0] == 'include'
+			K=ParseInputFile(parts[1])
+			#copy and update
+			for key in K:
+				R[key]=K;
 		#VALUES
 		if parts[0] == 'OutputFile':
 			R[ parts[0] ] = parts[1]

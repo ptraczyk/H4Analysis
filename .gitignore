@@ -12,3 +12,5 @@
 ## Images/PDF ##
 *.pdf
 *.png
+bin/
+dict/
