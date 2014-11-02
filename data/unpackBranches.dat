@@ -22,7 +22,7 @@ digiFrequency
 digiGroup
 digiChannel
 digiSampleIndex
-digiSample
+digiSampleValue
 digiBoard
                      
 nScalerWords

@@ -53,7 +53,7 @@ void Looper::SetBranchesH4tree()
 	SetBranchAddress("digiGroup",&digiGroup[0]);
 	SetBranchAddress("digiChannel",&digiChannel[0]);
 	SetBranchAddress("digiSampleIndex",&digiSampleIndex[0]);
-	SetBranchAddress("digiSample",&digiSample[0]);
+	SetBranchAddress("digiSampleValue",&digiSampleValue[0]);
 	SetBranchAddress("digiBoard",&digiBoard[0]);
                                                
 	SetBranchAddress("nScalerWords",&nScalerWords);

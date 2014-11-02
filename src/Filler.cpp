@@ -125,7 +125,7 @@ void Filler::SetBranchesH4tree()
 	SetBranchAddress("digiGroup"	,&out.digiGroup[0]);
 	SetBranchAddress("digiChannel"	,&out.digiChannel[0]);
 	SetBranchAddress("digiSampleIndex",&out.digiSampleIndex[0]);
-	SetBranchAddress("digiSample"	,&out.digiSample[0]);
+	SetBranchAddress("digiSampleValue"	,&out.digiSampleValue[0]);
 	SetBranchAddress("digiBoard"	,&out.digiBoard[0]);
                                           
 	SetBranchAddress("nScalerWords"	,&out.nScalerWords);

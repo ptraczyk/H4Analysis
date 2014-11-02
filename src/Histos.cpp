@@ -17,7 +17,7 @@ void Histos::FillHisto(string name, double value, double weight)
 	}
 void Histos::FillProfile(string name, double x,double y, double weight)
 	{
-	//cout<<"[Histos]::[FillProfile]"<<name<<endl; //DEBUG
+	cout<<"[Histos]::[FillProfile]"<<name<<endl; //DEBUG
 	dynamic_cast<TProfile*>(histoContainer[name])->Fill(x,y,weight);
 	}
 void Histos::Write()

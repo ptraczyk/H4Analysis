@@ -45,7 +45,7 @@ map<string,bool> isFilled;
 	UInt_t digiGroup[MAX_DIGI_SAMPLES];
 	UInt_t digiChannel[MAX_DIGI_SAMPLES];
 	UInt_t digiSampleIndex[MAX_DIGI_SAMPLES];
-	Float_t digiSample[MAX_DIGI_SAMPLES];
+	Float_t digiSampleValue[MAX_DIGI_SAMPLES];
 	UInt_t digiBoard[MAX_DIGI_SAMPLES];
 	UInt_t nScalerWords;
 	UInt_t scalerWord[MAX_SCALER_WORDS];

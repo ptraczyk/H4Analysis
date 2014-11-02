@@ -44,7 +44,7 @@ void LoopAndFill::Fill(){
 	CopyArray(digiGroup,out.digiGroup,nDigiSamples);
 	CopyArray(digiChannel,out.digiChannel,nDigiSamples);
 	CopyArray(digiSampleIndex,out.digiSampleIndex,nDigiSamples);
-	CopyArray(digiSample,out.digiSample,nDigiSamples);
+	CopyArray(digiSampleValue,out.digiSampleValue,nDigiSamples);
 	CopyArray(digiBoard,out.digiBoard,nDigiSamples);
 
 	CopyArray(scalerWord,out.scalerWord,nScalerWords);
