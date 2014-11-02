@@ -55,18 +55,22 @@ for f in config['InputFiles']:
 if opts.debug >0 : print "-> Init Analysis"
 ## INIT ANALYSIS
 analysis=[]
-###  for name in config['Analysis']:
-###  	print "Loading Analysis: '" +name+"'"
-###  	#exec("A=ROOT."+name)
-###  	ROOT.ParseLine("")
-###  	A.Init( l);
-###  	analysis.append(A)
+for name in config['Analysis']:
+	print "Loading Analysis: '" +name+"'"
+   	analyzer = ROOT.__getattr__(name)()
+	## config
+	if name in config['config']:
+		for line in config['config'][name]:
+			print "Configuring Analysis "+name+"  with line " + line ##DEBUG
+			exec("analyzer."+line ) 
+	analyzer.Init( l);
+	analysis.append(analyzer)
 
-A=ROOT.PedestalAnalysis()
-A.nChannels=4
-A.HV.push_back(600)
-A.Init(l)
-analysis.append(A)
+### A=ROOT.PedestalAnalysis()
+### A.nChannels=4
+### A.HV.push_back(600)
+### A.Init(l)
+### analysis.append(A)
 
 if opts.debug >0 : print "-> Looping"
 

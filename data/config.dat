@@ -18,4 +18,4 @@ OutputFile=output.root
 OutputBranches=data/minimalBranches.dat
 ####### Analysis #######
 Analysis=BaseAnalysis,PedestalAnalysis
-
+config=PedestalAnalysis nChannels=4 HV.push_back(600)

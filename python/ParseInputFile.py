@@ -1,6 +1,7 @@
 def ParseInputFile(fileName):
 	f=open(fileName,"r");
 	R={}
+	R['config']={}
 	for line in f:
 		l3=line.split('\n')[0] ## remove \n, spaces ...
 		l2=l3.split('#')[0]
@@ -37,6 +38,14 @@ def ParseInputFile(fileName):
 					br= branch.split('#')[0]
 					if br == "": continue
 					R[parts[0]]+= br
+		###CONFIG ANALYSIS
+		if parts[0]=='config':
+			configline='='.join(parts[1:]).split(' ')
+			Analysis=configline[0]
+			R[ parts[0] ][ Analysis ]=[]
+			for i in range(1,len( configline)):
+				#print "Config Line for analysis ", Analysis , " is ",configline[i]
+				R[ parts[0] ][ Analysis ].append( configline[i] )
 			
 	return R
 def PrintConfiguration(config):
