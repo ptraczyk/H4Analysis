@@ -5,15 +5,14 @@
 #include "TFile.h"
 #include "TChain.h"
 #include <iostream>
-#include "interface/BaseAnalysis.hpp"
 #include "interface/Event.hpp"
 using namespace std;
+//fwd decl
 
 
 class Looper : 
 	virtual public tree 
 {
-friend class BaseAnalysis;
 
 private:
 	TChain *fChain;
@@ -58,6 +57,7 @@ void Looper::SetBranchAddress(string name,T ptr)
   	cout<<"* Setting Branch Address For Branch:"<<name<<endl;
 	}
 }
+
 
 #endif
 

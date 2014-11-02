@@ -2,18 +2,19 @@
 #define BASE_ANALYSIS_H
 
 // -- fwd declared
-class Looper;
+class LoopAndFill;
 
 class BaseAnalysis{
-	Looper  *l;
+protected:
+	LoopAndFill  *l;
 public:
 	BaseAnalysis(){};
 	~BaseAnalysis(){};
-	virtual void Init(Looper*l1); // { l = l1 ; };
+	virtual void Init(LoopAndFill*l1); // { l = l1 ; };
 	virtual void Loop();
 	virtual void AnalyzeEvent();
 };
 
-#include "interface/Looper.hpp"
+#include "interface/LooperAndFiller.hpp"
 
 #endif
