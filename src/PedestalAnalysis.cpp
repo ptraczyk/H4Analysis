@@ -5,7 +5,7 @@ void PedestalAnalysis::AnalyzeEvent()
 {
 
 	for (unsigned int iSample=0;iSample< l->nDigiSamples;iSample++)
-		l->FillProfile( Form("tprofile_pedestal_ch%d_HV%d",l->digiChannel[iSample], 0 ), l->digiSampleIndex[iSample] +1 , l->digiSampleValue[iSample] );
+		if(l->digiChannel[iSample] <nChannels) l->FillProfile( Form("tprofile_pedestal_ch%d_HV%d",l->digiChannel[iSample], 0 ), l->digiSampleIndex[iSample] +1 , l->digiSampleValue[iSample] );
 	return;
 }
 
