@@ -12,8 +12,10 @@ PEDESTAL=516;10;10
 
 ######## Input Files #######
 InputFiles=516/1.root,516/2.root
+InputBranches=data/unpackBranches.dat
 ######## Output File #######
 OutputFile=output.root
+OutputBranches=data/minimalBranches.dat
 ####### Analysis #######
-Analysis=BaseAnalysis
+Analysis=BaseAnalysis,PedestalAnalysis
 

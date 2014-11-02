@@ -14,7 +14,7 @@ class Looper :
 	virtual public tree 
 {
 
-private:
+protected:
 	TChain *fChain;
 
 	void SetBranchesH4tree();

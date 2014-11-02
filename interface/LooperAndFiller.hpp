@@ -6,10 +6,11 @@
 #include "interface/Histos.hpp"
 
 class LoopAndFill: 
+	virtual public Histos,
 	virtual public Looper,
-	virtual public Filler,
-	virtual public Histos
+	virtual public Filler
 {
+protected:
 	template<class T> 
 	void CopyArray(T* src,T*dest,int n);
 	template<class T> 

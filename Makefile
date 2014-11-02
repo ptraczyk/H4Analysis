@@ -86,7 +86,7 @@ $(StatLib): $(BINOBJ) $(Dict)
 soLib: $(SoLib)
 
 $(SoLib): $(StatLib)
-	$(LD) $(LDFLAGS) $(SOFLAGS) -o $@ $^
+	$(LD) $(LDFLAGS) $(SOFLAGS) -o $@  $(BINOBJ) $(Dict)
 
 .PHONY: $(Packages) 
 $(Packages): % : $(BINDIR)/% | $(BINDIR)
