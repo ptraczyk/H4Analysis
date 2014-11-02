@@ -170,7 +170,7 @@ void Filler::SetBranchesOuttree(){
 
 bool Filler::isActive(string name)
 {
-	map<string,bool>::iterator it;
+	map<string,int>::iterator it;
 	it=activeBranches.find(name);
 	if (it == activeBranches.end() ) return false;
 	else return activeBranches[name];

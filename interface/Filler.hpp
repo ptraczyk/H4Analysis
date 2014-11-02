@@ -37,9 +37,10 @@ protected:
 	void SetBranchAddress(string name,vector<unsigned long long>** ptr);
 public:
 	string outTreeName;
-	map<string,bool> activeBranches;	
+	map<string,int> activeBranches;	
 	Filler(){};
 	~Filler(){};
+	inline void AddActiveBranch(string name) { activeBranches[name]=1;};
 	void Init();
 	void Write();
 	void SetBranches(); // DO NOT PUT THIS VIRTUAL

@@ -25,7 +25,8 @@ public:
 	Looper(){ fChain=NULL; chainName="";};
 	~Looper(){};
 	string chainName;
-	map<string,bool> inputBranches;	
+	map<string,int> inputBranches;	
+	inline void AddInputBranch(string name) { inputBranches[name]=1;};
 	void AddToChain(string fileName);	
 	void Init();
 	void SetBranches(string tree="H4tree");
@@ -43,7 +44,7 @@ void Looper::SetBranchAddress(string name,T ptr)
   fChain->SetBranchAddress(name.c_str(),ptr); 
   if ( !inputBranches.empty() )
 	{
-	map<string,bool>::iterator it;
+	map<string,int>::iterator it;
 	it=inputBranches.find(name);
 	if (it != inputBranches.end() ){
 		fChain->SetBranchStatus(name.c_str(),1);

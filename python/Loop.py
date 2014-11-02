@@ -36,18 +36,23 @@ l=ROOT.LoopAndFill()
 ## INPUT
 l.chainName="H4tree"
 #l.inputBranches[]=1
-for f in config['InputFiles']:
-	print "Adding file '"+f+"'"
-	l.AddToChain(f);
 for b in config['InputBranches']:
-	l.inputBranches[b]=1
+	#l.inputBranches[b]=1
+	l.AddInputBranch(b);
 ## OUTPUT
 l.outFileName=config['OutputFile']
 l.outTreeName="outputTree"
 for b in config['OutputBranches']:
-	l.activeBranches[b]=1
+	#l.activeBranches[b]=1
+	l.AddActiveBranch(b);
 l.Init();
 
+## INPUT -- POST INIT
+for f in config['InputFiles']:
+	print "Adding file '"+f+"'"
+	l.AddToChain(f);
+
+if opts.debug >0 : print "-> Init Analysis"
 ## INIT ANALYSIS
 analysis=[]
 ###  for name in config['Analysis']:
@@ -58,6 +63,8 @@ analysis=[]
 ###  	analysis.append(A)
 
 A=ROOT.PedestalAnalysis()
+A.nChannels=4
+A.HV.push_back(600)
 A.Init(l)
 analysis.append(A)
 
@@ -68,7 +75,7 @@ for iEntry in range(0,l.GetEntries() ) :
 	l.GetEntry(iEntry)
 	## ALL ANALYSIS ANALIZE EVENT
 	for A in analysis:
-		A.AnalizeEvent()
+		A.AnalyzeEvent()
 	
 if opts.debug >0 : print "-> Writing"
 l.Write();
