@@ -6,12 +6,14 @@
 #include "TChain.h"
 #include <iostream>
 #include "interface/Event.hpp"
+#include "interface/Watch.hpp"
 using namespace std;
 //fwd decl
 
 
 class Looper : 
-	virtual public tree 
+	virtual public tree,
+	public Watch
 {
 
 protected:
@@ -32,7 +34,7 @@ public:
 	void SetBranches(string tree="H4tree");
 	template<class T>
 	void SetBranchAddress(string name,T ptr);
-	inline void GetEntry( ULong64_t iEntry){ fChain->GetEntry(iEntry);};
+	inline void GetEntry( ULong64_t iEntry){ StartWatch(); fChain->GetEntry(iEntry); StopWatch(); };
 	inline long GetEntries() { return fChain->GetEntries(); }
 
 };

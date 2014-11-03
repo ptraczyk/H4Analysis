@@ -79,7 +79,9 @@ for iEntry in range(0,l.GetEntries() ) :
 	l.GetEntry(iEntry)
 	## ALL ANALYSIS ANALIZE EVENT
 	for A in analysis:
+		A.StartWatch();
 		A.AnalyzeEvent()
+		A.StopWatch();
 	l.Fill()
 	
 if opts.debug >0 : print "-> Writing"
@@ -87,3 +89,19 @@ l.Write();
 l.Close();
 
 if opts.debug >0 : print "-> END"
+
+print "******* TIME SUMMARY ********"
+print "------------------------"
+print "    Looper   " 
+print "------------------------"
+print "CpuTime:",l.CpuTime()
+print "RealTime:",l.RealTime()
+print "------------------------"
+for i in range(0,len(analysis)):
+	print "    %s   " %config["Analysis"][i]
+	print "------------------------"
+	print "CpuTime:",analysis[i].CpuTime()
+	print "RealTime:",analysis[i].RealTime()
+	print "------------------------"
+print "*****************************"
+

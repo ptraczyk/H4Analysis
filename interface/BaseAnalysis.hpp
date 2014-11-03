@@ -1,10 +1,12 @@
 #ifndef BASE_ANALYSIS_H
 #define BASE_ANALYSIS_H
 
+#include "interface/Watch.hpp"
+
 // -- fwd declared
 class LoopAndFill;
 
-class BaseAnalysis{
+class BaseAnalysis: public Watch {
 protected:
 	LoopAndFill  *l;
 public:
