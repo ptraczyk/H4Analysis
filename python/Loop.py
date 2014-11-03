@@ -72,7 +72,7 @@ for name in config['Analysis']:
 ### A.Init(l)
 ### analysis.append(A)
 
-if opts.debug >0 : print "-> Looping"
+if opts.debug >0 : print "-> Looping: Entries=",l.GetEntries() 
 
 for iEntry in range(0,l.GetEntries() ) :
 	if opts.debug >0  and iEntry % 1000 ==0 : print "--> Entry",iEntry,"of",l.GetEntries()
