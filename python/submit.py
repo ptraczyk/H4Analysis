@@ -33,7 +33,7 @@ if opts.tar:
 	print " ".join(cmd)
 	call(cmd)
 
-splittedInput=chunkIt(config['InputFiles'],opts.njobs)
+splittedInput=chunkIt(config['InputFiles'],opts.njobs )
 
 for iJob in range(0,opts.njobs):
 	sh=open("%s/sub%d.sh"%(opts.dir,iJob),"w")
@@ -64,6 +64,7 @@ for iJob in range(0,opts.njobs):
 	
 	dat=open("%s/input%d.dat"%(opts.dir,iJob),"w")
 	dat.write("include=%s\n"%opts.input)
+	#print "inputFiles=",config['InputFiles'], "Splitted=",splittedInput,"\n\nselected=",','.join(splittedInput[iJob]),"\n\n" ###DEBUG
 	dat.write('InputFiles=%s\n'%( ','.join(splittedInput[iJob]) ) )
 	dat.write('OutputFile=%s/output%d.root\n'%(opts.dir,iJob) )
 
