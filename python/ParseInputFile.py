@@ -1,3 +1,5 @@
+import re
+from os import popen
 def ParseInputFile(fileName):
 	f=open(fileName,"r");
 	R={}
@@ -73,3 +75,39 @@ def chunkIt(seq, num):
   ###   last += avg
 
   ### return out
+
+def ReadSRM(url):
+    prefix=""
+    postfix=""
+    if "dcap" in url:
+	#srmls srm://t3se01.psi.ch:8443/srm/managerv2?SFN=
+	#dcap://t3se01.psi.ch:22125/
+	##    aosutheou/prefix*postfix
+	if '*' in url:
+		star=url.rfind('*')
+		prefix=url[:star]
+		if '/' in prefix:
+			slash=prefix.rfind('/')
+			prefix=prefix[slash+1:]
+		postfix=url[star+1:]
+		slash=url.rfind('/')
+		url=url[:slash+1]
+	
+	pfn=re.sub('t3se01.psi.ch:22125','t3se01.psi.ch:8443/srm/managerv2?SFN=', ### T3. TODO Add T2
+		re.sub('dcap://','srm://',url)
+		)
+    elif "srm" in url:
+	pfn=url
+    else:	
+    	pfn=url
+    command = "lcg-ls -b -D srmv2 "+pfn+" 2>/dev/null"
+    print "Executing command: " + command
+    out_pipe = popen( command )
+    #print "lcg-ls -l "+pfn+" 2>/dev/null | awk '{print $5}'"
+    #out = [ line  for line in out_pipe.readlines() if ( prefix== "" or re.match(prefix,line) ) and ( postfix=="" or re.match(postfix,line) ) ]
+    out = [ re.sub('^','dcap://t3se01.psi.ch:22125//srm/managerv2?SFN=',re.sub('\n','',line)) for line in out_pipe.readlines() if  ( postfix== "" or re.search(postfix,line) ) and ( prefix== "" or re.search(prefix,line) )  ]
+    #print "OUT IS ",out
+    out_pipe.close() 
+    return out
+	
+

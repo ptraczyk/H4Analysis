@@ -33,6 +33,20 @@ if opts.tar:
 	print " ".join(cmd)
 	call(cmd)
 
+## expand *
+fileList=[]
+for f in config['InputFiles']:
+	list=[]
+	if 'dcap' in f or 'srm' in f:	
+		list=ReadSRM(f)
+	else :
+		list=glob(f)
+		if list == []: ### maybe remote ?
+			list=f
+	fileList.extend(list)
+config['InputFiles']=fileList
+	
+
 splittedInput=chunkIt(config['InputFiles'],opts.njobs )
 
 for iJob in range(0,opts.njobs):
