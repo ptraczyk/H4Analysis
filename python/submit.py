@@ -33,7 +33,21 @@ if opts.tar:
 	print " ".join(cmd)
 	call(cmd)
 
-splittedInput=chunkIt(config['InputFiles'],opts.njobs)
+## expand *
+fileList=[]
+for f in config['InputFiles']:
+	list=[]
+	if 'dcap' in f or 'srm' in f:	
+		list=ReadSRM(f)
+	else :
+		list=glob(f)
+		if list == []: ### maybe remote ?
+			list=f
+	fileList.extend(list)
+config['InputFiles']=fileList
+	
+
+splittedInput=chunkIt(config['InputFiles'],opts.njobs )
 
 for iJob in range(0,opts.njobs):
 	sh=open("%s/sub%d.sh"%(opts.dir,iJob),"w")
@@ -64,6 +78,7 @@ for iJob in range(0,opts.njobs):
 	
 	dat=open("%s/input%d.dat"%(opts.dir,iJob),"w")
 	dat.write("include=%s\n"%opts.input)
+	#print "inputFiles=",config['InputFiles'], "Splitted=",splittedInput,"\n\nselected=",','.join(splittedInput[iJob]),"\n\n" ###DEBUG
 	dat.write('InputFiles=%s\n'%( ','.join(splittedInput[iJob]) ) )
 	dat.write('OutputFile=%s/output%d.root\n'%(opts.dir,iJob) )
 
