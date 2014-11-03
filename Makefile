@@ -52,7 +52,7 @@ LDFLAGS += `root-config --libs`
 
 #wait to update Packages in NO_xxx
 .PHONY: all2
-all2: info $(Packages) | $(BINDIR)
+all2: info $(Packages) soLib | $(BINDIR)
 
 BINOBJ	=$(patsubst %,$(BINDIR)/%.$(ObjSuf),$(Objects) )
 SRCFILES=$(patsubst %,$(SRCDIR)/%.$(SrcSuf),$(Objects) )
