@@ -1,5 +1,21 @@
 #include "interface/LooperAndFiller.hpp"
 
+// ------------------
+void LoopAndFill::CopyArray(bool* src,bool* dest,int n)			{if (src==NULL || dest==NULL ) return ;for(int i=0;i<n;++i) dest[i]=src[i];}
+void LoopAndFill::CopyArray(int* src,int* dest,int n)			{if (src==NULL || dest==NULL ) return ;for(int i=0;i<n;++i) dest[i]=src[i];}
+void LoopAndFill::CopyArray(unsigned int* src,unsigned int* dest,int n)	{if (src==NULL || dest==NULL ) return ;for(int i=0;i<n;++i) dest[i]=src[i];}
+void LoopAndFill::CopyArray(float* src,float* dest,int n)		{if (src==NULL || dest==NULL ) return ;for(int i=0;i<n;++i) dest[i]=src[i];}
+void LoopAndFill::CopyArray(double* src,double* dest,int n)		{if (src==NULL || dest==NULL ) return ;for(int i=0;i<n;++i) dest[i]=src[i];}
+void LoopAndFill::CopyArray(unsigned long long* src,unsigned long long* dest,int n){if (src==NULL || dest==NULL ) return ;for(int i=0;i<n;++i) dest[i]=src[i];}
+// ----------------------
+void LoopAndFill::CopyVector(vector<bool> *src,vector<bool> *dest)			{if (src==NULL || dest==NULL ) return ;dest->clear();for(unsigned int i=0;i<src->size() ;++i)dest->push_back( src->at(i) );}
+void LoopAndFill::CopyVector(vector<int> *src,vector<int> *dest)			{if (src==NULL || dest==NULL ) return ;dest->clear();for(unsigned int i=0;i<src->size() ;++i)dest->push_back( src->at(i) );}
+void LoopAndFill::CopyVector(vector<unsigned int> *src,vector<unsigned int> *dest)	{if (src==NULL || dest==NULL ) return ;dest->clear();for(unsigned int i=0;i<src->size() ;++i)dest->push_back( src->at(i) );}
+void LoopAndFill::CopyVector(vector<float> *src,vector<float> *dest)			{if (src==NULL || dest==NULL ) return ;dest->clear();for(unsigned int i=0;i<src->size() ;++i)dest->push_back( src->at(i) );}
+void LoopAndFill::CopyVector(vector<double> *src,vector<double> *dest)			{if (src==NULL || dest==NULL ) return ;dest->clear();for(unsigned int i=0;i<src->size() ;++i)dest->push_back( src->at(i) );}
+void LoopAndFill::CopyVector(vector<unsigned long long> *src,vector<unsigned long long> *dest){if (src==NULL || dest==NULL ) return ;dest->clear();for(unsigned int i=0;i<src->size() ;++i)dest->push_back( src->at(i) );}
+// ----------------------
+
 void LoopAndFill::Init(){
 	Looper::Init();
 	Filler::Init();
@@ -72,5 +88,11 @@ void LoopAndFill::Fill(){
  	CopyVector(HODOX2                ,out.HODOX2);
  	CopyVector(HODOY1                ,out.HODOY1);
  	CopyVector(HODOY2                ,out.HODOY2);
-			
+	
+	Filler::Fill();	
+}
+
+void LoopAndFill::Write(){
+	Histos::Write();
+	Filler::Write();
 }

@@ -6,36 +6,42 @@
 void Filler::SetBranchAddress(string name, vector<unsigned int>** ptr)
 {
 	if (!isActive(name) ) return;
+	cout<<"[Filler]::[SetBranchAddress]Setting address for branch "<<name<<" with type vector<unsigned int>"<<endl;
 	fChain->Branch(name.c_str(),"vector<unsigned int>",ptr);	
 	out.isFilled[name]=1;
 }
 void Filler::SetBranchAddress(string name, vector<int>** ptr)
 {
 	if (!isActive(name) ) return;
+	cout<<"[Filler]::[SetBranchAddress]Setting address for branch "<<name<<" with type vector<int>"<<endl;
 	fChain->Branch(name.c_str(),"vector<int>",ptr);	
 	out.isFilled[name]=1;
 }
 void Filler::SetBranchAddress(string name, vector<float>** ptr)
 {
 	if (!isActive(name) ) return;
+	cout<<"[Filler]::[SetBranchAddress]Setting address for branch "<<name<<" with type vector<float>"<<endl;
 	fChain->Branch(name.c_str(),"vector<float>",ptr);	
 	out.isFilled[name]=1;
 }
 void Filler::SetBranchAddress(string name, vector<double>** ptr)
 {
 	if (!isActive(name) ) return;
+	cout<<"[Filler]::[SetBranchAddress]Setting address for branch "<<name<<" with type vector<double>"<<endl;
 	fChain->Branch(name.c_str(),"vector<double>",ptr);	
 	out.isFilled[name]=1;
 }
 void Filler::SetBranchAddress(string name, vector<bool>** ptr)
 {
 	if (!isActive(name) ) return;
+	cout<<"[Filler]::[SetBranchAddress]Setting address for branch "<<name<<" with type vector<bool>"<<endl;
 	fChain->Branch(name.c_str(),"vector<bool>",ptr);	
 	out.isFilled[name]=1;
 }
 void Filler::SetBranchAddress(string name, vector<unsigned long long>** ptr)
 {
 	if (!isActive(name) ) return;
+	cout<<"[Filler]::[SetBranchAddress]Setting address for branch "<<name<<" with type vector<unsigned long long>"<<endl;
 	fChain->Branch(name.c_str(),"vector<unsigned long long>",ptr);
 	out.isFilled[name]=1;
 }
@@ -43,30 +49,35 @@ void Filler::SetBranchAddress(string name, vector<unsigned long long>** ptr)
 void Filler::SetBranchAddress(string name, unsigned int* ptr)
 {
 	if (!isActive(name) ) return;
+	//cout<<"[Filler]::[SetBranchAddress]Setting address for branch "<<name<<" with type uint"<<endl;
 	fChain->Branch(Form("%s/i",name.c_str()),ptr);	
 	out.isFilled[name]=1;
 }
 void Filler::SetBranchAddress(string name, unsigned long long* ptr)
 {
 	if (!isActive(name) ) return;
+	cout<<"[Filler]::[SetBranchAddress]Setting address for branch "<<name<<" with type u long long"<<endl;
 	fChain->Branch(Form("%s/l",name.c_str()),ptr);	
 	out.isFilled[name]=1;
 }
 void Filler::SetBranchAddress(string name, int* ptr)
 {
 	if (!isActive(name) ) return;
+	cout<<"[Filler]::[SetBranchAddress]Setting address for branch "<<name<<" with type int"<<endl;
 	fChain->Branch(Form("%s/I",name.c_str()),ptr);	
 	out.isFilled[name]=1;
 }
 void Filler::SetBranchAddress(string name, float* ptr)
 {
 	if (!isActive(name) ) return;
+	cout<<"[Filler]::[SetBranchAddress]Setting address for branch "<<name<<" with type float"<<endl;
 	fChain->Branch(Form("%s/F",name.c_str()),ptr);	
 	out.isFilled[name]=1;
 }
 void Filler::SetBranchAddress(string name, double* ptr)
 {
 	if (!isActive(name) ) return;
+	cout<<"[Filler]::[SetBranchAddress]Setting address for branch "<<name<<" with type double"<<endl;
 	fChain->Branch(Form("%s/D",name.c_str()),ptr);	
 	out.isFilled[name]=1;
 }
@@ -76,11 +87,15 @@ void Filler::Init()
 {
 	//fOut=TFile::Open(outFileName.c_str(),"RECREATE");
 	OutFile::Init();
-	fChain=new TChain(outTreeName.c_str());
+	fOut->cd();
+	cout<<"[Filler]::[Init]:Creating tree with name: "<<outTreeName<<endl;
+	fChain=new TTree(outTreeName.c_str(),outTreeName.c_str());
 	SetBranches();
 }
 
 void Filler::Write(){
+	cout<<"[Filler]::[Write] Tree "<<endl;
+	fChain->Print();
 	fChain->Write();
 	//fOut->Close();
 }
@@ -90,7 +105,7 @@ void Filler::SetBranches()
 	if ( !activeBranches.empty() )
 		{
 		// disable all the branches
-		fChain->SetBranchStatus("*",0);
+		//fChain->SetBranchStatus("*",0);
 		}
 	// here will be setted if in activeBranches
 	SetBranchesCommon();
@@ -176,3 +191,8 @@ bool Filler::isActive(string name)
 	else return activeBranches[name];
 }
 
+void Filler::Fill( )
+{ 
+	//cout<<"[Filler]::[Fill] Fill tree:"<<fChain->GetEntries()<<endl;
+	fChain->Fill() ;
+}

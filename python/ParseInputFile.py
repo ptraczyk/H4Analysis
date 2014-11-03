@@ -31,15 +31,15 @@ def ParseInputFile(fileName):
 				R[parts[0]] += row.split(',')
 		# FILES
 		if parts[0]=='InputBranches' or parts[0] == 'OutputBranches':
-			if parts[0] not in R:
-				R[parts[0]]=[]
+			R[parts[0]]=[]
 			fileList=parts[1].split(',')
 			for fName in fileList:
 				fIn=open(fName,"r")
-				for branch in fName:
+				for branch in fIn:
 					br= branch.split('#')[0]
+					br= re.sub('\n','',br)
 					if br == "": continue
-					R[parts[0]]+= br
+					R[parts[0]].append( br )
 		###CONFIG ANALYSIS
 		if parts[0]=='config':
 			configline='='.join(parts[1:]).split(' ')

@@ -80,6 +80,7 @@ for iEntry in range(0,l.GetEntries() ) :
 	## ALL ANALYSIS ANALIZE EVENT
 	for A in analysis:
 		A.AnalyzeEvent()
+	l.Fill()
 	
 if opts.debug >0 : print "-> Writing"
 l.Write();
