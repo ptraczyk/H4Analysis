@@ -48,7 +48,7 @@ public:
 	//template<class T>
 	//void SetBranchAddress(string name,T ptr);
 
-	inline void Fill( ){ fChain->Fill() ;};
+	void Fill( );//{ fChain->Fill() ;};
 
 };
 

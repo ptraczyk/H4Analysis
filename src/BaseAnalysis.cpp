@@ -8,4 +8,5 @@ void BaseAnalysis::Init(LoopAndFill*l1)
 	cout<<"[BaseAnalysis]::[Init]::Done"<<endl;
 	return;
 	}
-void BaseAnalysis::AnalyzeEvent(){};
+void BaseAnalysis::AnalyzeEvent(){}
+

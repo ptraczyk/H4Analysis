@@ -72,17 +72,37 @@ for name in config['Analysis']:
 ### A.Init(l)
 ### analysis.append(A)
 
-if opts.debug >0 : print "-> Looping"
+if opts.debug >0 : print "-> Looping: Entries=",l.GetEntries() 
 
 for iEntry in range(0,l.GetEntries() ) :
 	if opts.debug >0  and iEntry % 1000 ==0 : print "--> Entry",iEntry,"of",l.GetEntries()
 	l.GetEntry(iEntry)
 	## ALL ANALYSIS ANALIZE EVENT
 	for A in analysis:
+		A.StartWatch();
+		A.ClearEvent()
 		A.AnalyzeEvent()
+		A.StopWatch();
+	l.Fill()
 	
 if opts.debug >0 : print "-> Writing"
 l.Write();
 l.Close();
 
 if opts.debug >0 : print "-> END"
+
+print "******* TIME SUMMARY ********"
+print "------------------------"
+print "    Looper   " 
+print "------------------------"
+print "CpuTime:",l.CpuTime()
+print "RealTime:",l.RealTime()
+print "------------------------"
+for i in range(0,len(analysis)):
+	print "    %s   " %config["Analysis"][i]
+	print "------------------------"
+	print "CpuTime:",analysis[i].CpuTime()
+	print "RealTime:",analysis[i].RealTime()
+	print "------------------------"
+print "*****************************"
+

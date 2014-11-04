@@ -22,7 +22,7 @@ def ParseInputFile(fileName):
 		if parts[0] == 'HV' or \
 			parts[0] == 'InputFiles' or  \
 			parts[0] == 'Analysis' :
-			R[parts[0]]=parts[1].split(',');
+			R[parts[0]]='='.join(parts[1:]).split(',');
 		#TABLES
 		if parts[0] == 'ENERGIES' or parts[0] == 'PEDESTAL':
 			table=parts[1].split(';'); 
@@ -31,15 +31,15 @@ def ParseInputFile(fileName):
 				R[parts[0]] += row.split(',')
 		# FILES
 		if parts[0]=='InputBranches' or parts[0] == 'OutputBranches':
-			if parts[0] not in R:
-				R[parts[0]]=[]
+			R[parts[0]]=[]
 			fileList=parts[1].split(',')
 			for fName in fileList:
 				fIn=open(fName,"r")
-				for branch in fName:
+				for branch in fIn:
 					br= branch.split('#')[0]
+					br= re.sub('\n','',br)
 					if br == "": continue
-					R[parts[0]]+= br
+					R[parts[0]].append( br )
 		###CONFIG ANALYSIS
 		if parts[0]=='config':
 			configline='='.join(parts[1:]).split(' ')
@@ -105,7 +105,7 @@ def ReadSRM(url):
     out_pipe = popen( command )
     #print "lcg-ls -l "+pfn+" 2>/dev/null | awk '{print $5}'"
     #out = [ line  for line in out_pipe.readlines() if ( prefix== "" or re.match(prefix,line) ) and ( postfix=="" or re.match(postfix,line) ) ]
-    out = [ re.sub('^','dcap://t3se01.psi.ch:22125//srm/managerv2?SFN=',re.sub('\n','',line)) for line in out_pipe.readlines() if  ( postfix== "" or re.search(postfix,line) ) and ( prefix== "" or re.search(prefix,line) )  ]
+    out = [ re.sub('^','dcap://t3se01.psi.ch:22125/',re.sub('\n','',line)) for line in out_pipe.readlines() if  ( postfix== "" or re.search(postfix,line) ) and ( prefix== "" or re.search(prefix,line) )  ]
     #print "OUT IS ",out
     out_pipe.close() 
     return out
