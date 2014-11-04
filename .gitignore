@@ -7,6 +7,8 @@
 *.pyc
 ## Vim ##
 ~*
+## Emacs ##
+*~
 ## Root/Binary ##
 *.root
 ## Images/PDF ##
