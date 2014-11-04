@@ -44,6 +44,7 @@ for (unsigned int iSample=0;iSample< l->nDigiSamples;iSample++)
  UInt_t digiSampleIndex = l->digiSampleIndex[iSample];
  Float_t digiSampleValue = l->digiSampleValue[iSample];
  UInt_t digiFrequency = l->digiFrequency[iSample];
+ if (digiChannel >= nChannels) continue;
  waveforms[ digiChannel ]-> addTimeAndSample(digiSampleIndex *timeSampleUnit(digiFrequency), digiSampleValue);
  }
  for(unsigned int i=0;i<waveforms.size() ;++i)
