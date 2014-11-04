@@ -94,4 +94,14 @@ void Looper::SetBranchesOuttree(){
 	SetBranchAddress("HODOX2",&HODOX2   );
 	SetBranchAddress("HODOY1",&HODOY1   );
 	SetBranchAddress("HODOY2",&HODOY2   );
+
+	SetBranchAddress("TableX",&TableX);
+	SetBranchAddress("TableY",&TableY);
+	SetBranchAddress("CeF3HV",&CeF3HV);
+	SetBranchAddress("BGOHV",&BGOHV);
+	SetBranchAddress("BeamEnergy",&BeamEnergy);
+	SetBranchAddress("BeamTilt",&BeamTilt);
+	SetBranchAddress("IsPhysics",&IsPhysics);
+
+
 }

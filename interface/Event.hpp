@@ -74,6 +74,14 @@ map<string,bool> isFilled;
  	vector<bool>   *HODOY1    ;
  	vector<bool>   *HODOY2    ;
 
+  float TableX;
+  float TableY;
+  float CeF3HV;
+  float BGOHV;
+  float BeamEnergy;
+  float BeamTilt;
+  int IsPhysics;
+
 	tree();
 	~tree();
 	

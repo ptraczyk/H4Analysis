@@ -88,6 +88,14 @@ void LoopAndFill::Fill(){
  	CopyVector(HODOX2                ,out.HODOX2);
  	CopyVector(HODOY1                ,out.HODOY1);
  	CopyVector(HODOY2                ,out.HODOY2);
+
+	out.TableX = TableX;
+	out.TableY = TableY;
+	out.CeF3HV = CeF3HV;
+	out.BGOHV = BGOHV;
+	out.BeamEnergy = BeamEnergy;
+	out.BeamTilt = BeamTilt;
+	out.IsPhysics = IsPhysics;
 	
 	Filler::Fill();	
 }

@@ -162,6 +162,7 @@ void Filler::SetBranchesH4tree()
 	SetBranchAddress("triggerWords"	,&out.triggerWords[0]);
 	SetBranchAddress("triggerWordsBoard",&out.triggerWordsBoard[0]);
 
+
 }
 
 void Filler::SetBranchesCommon(){
@@ -187,6 +188,15 @@ void Filler::SetBranchesOuttree(){
 	SetBranchAddress("HODOX2",&out.HODOX2   );
 	SetBranchAddress("HODOY1",&out.HODOY1   );
 	SetBranchAddress("HODOY2",&out.HODOY2   );
+
+	SetBranchAddress("TableX",&out.TableX);
+	SetBranchAddress("TableY",&out.TableY);
+	SetBranchAddress("CeF3HV",&out.CeF3HV);
+	SetBranchAddress("BGOHV",&out.BGOHV);
+	SetBranchAddress("BeamEnergy",&out.BeamEnergy);
+	SetBranchAddress("BeamTilt",&out.BeamTilt);
+	SetBranchAddress("IsPhysics",&out.IsPhysics);
+
 }
 
 bool Filler::isActive(string name)
