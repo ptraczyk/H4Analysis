@@ -1,7 +1,7 @@
 INC_DIR = ./
 CXX		=g++
 LD		=g++
-CXXFLAGS	=-O2 -ggdb -std=gnu++0x -Wall -fPIC -I/usr/include/mysql
+CXXFLAGS	=-O2 -ggdb -std=gnu++0x -Wall -fPIC -I/usr/include/mysql $(CFLAGS)
 CXXFLAGSLINKDEF	=-fPIC
 LDFLAGS		=-lz -lm
 SOFLAGS		=-fPIC -shared 
