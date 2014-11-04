@@ -80,6 +80,7 @@ for iEntry in range(0,l.GetEntries() ) :
 	## ALL ANALYSIS ANALIZE EVENT
 	for A in analysis:
 		A.StartWatch();
+		A.ClearEvent()
 		A.AnalyzeEvent()
 		A.StopWatch();
 	l.Fill()
