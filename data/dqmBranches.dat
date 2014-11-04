@@ -1,4 +1,3 @@
-ADCvalues
 BGOvalues
 SCINTvalues
 TDCreco
@@ -13,3 +12,10 @@ HODOX1
 HODOX2
 HODOY1
 HODOY2
+nDigiSamples
+digiFrequency
+digiGroup
+digiChannel
+digiSampleIndex
+digiSampleValue
+digiBoard
