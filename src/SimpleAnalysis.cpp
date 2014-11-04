@@ -34,7 +34,7 @@ if (l->digi_pedestal_rms != NULL) 	l->digi_pedestal_rms->clear();
 
 void SimpleAnalysis::AnalyzeEvent()
 {
-ClearEvent();
+//ClearEvent(); //called by the python directly
 for (unsigned int iSample=0;iSample< l->nDigiSamples;iSample++)
  {
  //fill waveform

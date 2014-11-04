@@ -56,35 +56,35 @@ void Filler::SetBranchAddress(string name, unsigned int* ptr)
 {
 	if (!isActive(name) ) return;
 	//cout<<"[Filler]::[SetBranchAddress]Setting address for branch "<<name<<" with type uint"<<endl;
-	fChain->Branch(Form("%s/i",name.c_str()),ptr);	
+	fChain->Branch(name.c_str(),ptr,Form("%s/i",name.c_str()));	
 	out.isFilled[name]=1;
 }
 void Filler::SetBranchAddress(string name, unsigned long long* ptr)
 {
 	if (!isActive(name) ) return;
 	cout<<"[Filler]::[SetBranchAddress]Setting address for branch "<<name<<" with type u long long"<<endl;
-	fChain->Branch(Form("%s/l",name.c_str()),ptr);	
+	fChain->Branch(name.c_str(),ptr,Form("%s/l",name.c_str()));	
 	out.isFilled[name]=1;
 }
 void Filler::SetBranchAddress(string name, int* ptr)
 {
 	if (!isActive(name) ) return;
 	cout<<"[Filler]::[SetBranchAddress]Setting address for branch "<<name<<" with type int"<<endl;
-	fChain->Branch(Form("%s/I",name.c_str()),ptr);	
+	fChain->Branch(name.c_str(),ptr,Form("%s/I",name.c_str()));	
 	out.isFilled[name]=1;
 }
 void Filler::SetBranchAddress(string name, float* ptr)
 {
 	if (!isActive(name) ) return;
 	cout<<"[Filler]::[SetBranchAddress]Setting address for branch "<<name<<" with type float"<<endl;
-	fChain->Branch(Form("%s/F",name.c_str()),ptr);	
+	fChain->Branch(name.c_str(),ptr,Form("%s/F",name.c_str()));	
 	out.isFilled[name]=1;
 }
 void Filler::SetBranchAddress(string name, double* ptr)
 {
 	if (!isActive(name) ) return;
 	cout<<"[Filler]::[SetBranchAddress]Setting address for branch "<<name<<" with type double"<<endl;
-	fChain->Branch(Form("%s/D",name.c_str()),ptr);	
+	fChain->Branch(name.c_str(),ptr,Form("%s/D",name.c_str()));	
 	out.isFilled[name]=1;
 }
 // ------------------------------------------------------------- 
