@@ -32,14 +32,14 @@ public:
 	void AddToChain(string fileName);	
 	void Init();
 	void SetBranches(string tree="H4tree");
-	template<class T>
-	void SetBranchAddress(string name,T ptr);
+	template<class T> void SetBranchAddress(string name,T ptr);
 	inline void GetEntry( ULong64_t iEntry){ StartWatch(); fChain->GetEntry(iEntry); StopWatch(); };
 	inline long GetEntries() { return fChain->GetEntries(); }
 
 };
 
 // TEMPLATE SHOULD stay in the .H file
+
 template<class T>
 void Looper::SetBranchAddress(string name,T ptr)
 {
@@ -60,7 +60,6 @@ void Looper::SetBranchAddress(string name,T ptr)
   	cout<<"* Setting Branch Address For Branch:"<<name<<endl;
 	}
 }
-
 
 #endif
 

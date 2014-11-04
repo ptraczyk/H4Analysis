@@ -73,6 +73,9 @@ map<string,bool> isFilled;
  	vector<bool>   *HODOX2    ;
  	vector<bool>   *HODOY1    ;
  	vector<bool>   *HODOY2    ;
+
+	tree();
+	~tree();
 	
 };
 #endif

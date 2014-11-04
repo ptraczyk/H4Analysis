@@ -1,2 +1,9 @@
 runNumber
+nDigiSamples
+digiFrequency
+digiGroup
+digiChannel
+digiSampleIndex
+digiSampleValue
+ADCvalues
 #None
