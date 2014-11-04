@@ -7,6 +7,7 @@ void Filler::SetBranchAddress(string name, vector<unsigned int>** ptr)
 {
 	if (!isActive(name) ) return;
 	cout<<"[Filler]::[SetBranchAddress]Setting address for branch "<<name<<" with type vector<unsigned int>"<<endl;
+	(*ptr) = new vector<unsigned int>();
 	fChain->Branch(name.c_str(),"vector<unsigned int>",ptr);	
 	out.isFilled[name]=1;
 }
@@ -14,6 +15,7 @@ void Filler::SetBranchAddress(string name, vector<int>** ptr)
 {
 	if (!isActive(name) ) return;
 	cout<<"[Filler]::[SetBranchAddress]Setting address for branch "<<name<<" with type vector<int>"<<endl;
+	(*ptr) = new vector<int>();
 	fChain->Branch(name.c_str(),"vector<int>",ptr);	
 	out.isFilled[name]=1;
 }
@@ -21,6 +23,7 @@ void Filler::SetBranchAddress(string name, vector<float>** ptr)
 {
 	if (!isActive(name) ) return;
 	cout<<"[Filler]::[SetBranchAddress]Setting address for branch "<<name<<" with type vector<float>"<<endl;
+	(*ptr) = new vector<float>();
 	fChain->Branch(name.c_str(),"vector<float>",ptr);	
 	out.isFilled[name]=1;
 }
@@ -28,6 +31,7 @@ void Filler::SetBranchAddress(string name, vector<double>** ptr)
 {
 	if (!isActive(name) ) return;
 	cout<<"[Filler]::[SetBranchAddress]Setting address for branch "<<name<<" with type vector<double>"<<endl;
+	(*ptr) = new vector<double>();
 	fChain->Branch(name.c_str(),"vector<double>",ptr);	
 	out.isFilled[name]=1;
 }
@@ -35,6 +39,7 @@ void Filler::SetBranchAddress(string name, vector<bool>** ptr)
 {
 	if (!isActive(name) ) return;
 	cout<<"[Filler]::[SetBranchAddress]Setting address for branch "<<name<<" with type vector<bool>"<<endl;
+	(*ptr) = new vector<bool>();
 	fChain->Branch(name.c_str(),"vector<bool>",ptr);	
 	out.isFilled[name]=1;
 }
@@ -116,9 +121,9 @@ void Filler::SetBranches()
 
 void Filler::SetBranchesH4tree()
 {
-	SetBranchAddress("runNumber"	,&out.runNumber );
-	SetBranchAddress("spillNumber"	,&out.spillNumber );
-	SetBranchAddress("evtNumber"	,&out.evtNumber );
+	//SetBranchAddress("runNumber"	,&out.runNumber );
+	//SetBranchAddress("spillNumber"	,&out.spillNumber );
+	//SetBranchAddress("evtNumber"	,&out.evtNumber );
 	SetBranchAddress("evtTimeDist"	,&out.evtTimeDist );
 	SetBranchAddress("evtTimeStart"	,&out.evtTimeStart );
 	SetBranchAddress("nEvtTimes"	,&out.nEvtTimes );
