@@ -6,7 +6,9 @@
 
 class PedestalAnalysis : public BaseAnalysis
 {
-
+/* Produce the profile histograms to do the subtraction
+ *
+ */
 public:
 	PedestalAnalysis(){};
 	~PedestalAnalysis(){};
