@@ -107,7 +107,10 @@ def ReadSRM(url):
     #out = [ line  for line in out_pipe.readlines() if ( prefix== "" or re.match(prefix,line) ) and ( postfix=="" or re.match(postfix,line) ) ]
     out = [ re.sub('^','dcap://t3se01.psi.ch:22125/',re.sub('\n','',line)) for line in out_pipe.readlines() if  ( postfix== "" or re.search(postfix,line) ) and ( prefix== "" or re.search(prefix,line) )  ]
     #print "OUT IS ",out
-    out_pipe.close() 
+    exit_status=out_pipe.close() 
+    if exit_status != None: 
+		print "ERROR: not able to read on the storage-element. Try to do:\n voms-proxy-init  -voms cms\n"
+		raise Exception('SRM', 'READ')
     return out
 	
 
