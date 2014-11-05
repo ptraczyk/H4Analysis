@@ -55,7 +55,7 @@ void Filler::SetBranchAddress(string name, vector<unsigned long long>** ptr)
 void Filler::SetBranchAddress(string name, unsigned int* ptr)
 {
 	if (!isActive(name) ) return;
-	//cout<<"[Filler]::[SetBranchAddress]Setting address for branch "<<name<<" with type uint"<<endl;
+	cout<<"[Filler]::[SetBranchAddress]Setting address for branch "<<name<<" with type uint"<<endl;
 	fChain->Branch(name.c_str(),ptr,Form("%s/i",name.c_str()));	
 	out.isFilled[name]=1;
 }
@@ -88,6 +88,42 @@ void Filler::SetBranchAddress(string name, double* ptr)
 	out.isFilled[name]=1;
 }
 // ------------------------------------------------------------- 
+// ---- ARRAYS ---
+void Filler::SetBranchArray(string name, unsigned int* ptr,string n)
+{
+	if (!isActive(name) ) return;
+	cout<<"[Filler]::[SetBranchArray]Setting address for branch "<<name<<" with type uint"<<endl;
+	fChain->Branch(name.c_str(),ptr,Form("%s[%s]/i",name.c_str(),n.c_str()));	
+	out.isFilled[name]=1;
+}
+void Filler::SetBranchArray(string name, unsigned long long* ptr,string n)
+{
+	if (!isActive(name) ) return;
+	cout<<"[Filler]::[SetBranchArray]Setting address for branch "<<name<<" with type u long long"<<endl;
+	fChain->Branch(name.c_str(),ptr,Form("%s[%s]/l",name.c_str(),n.c_str()));	
+	out.isFilled[name]=1;
+}
+void Filler::SetBranchArray(string name, int* ptr,string n)
+{
+	if (!isActive(name) ) return;
+	cout<<"[Filler]::[SetBranchArray]Setting address for branch "<<name<<" with type int"<<endl;
+	fChain->Branch(name.c_str(),ptr,Form("%s[%s]/I",name.c_str(),n.c_str()));	
+	out.isFilled[name]=1;
+}
+void Filler::SetBranchArray(string name, float* ptr,string n)
+{
+	if (!isActive(name) ) return;
+	cout<<"[Filler]::[SetBranchArray]Setting address for branch "<<name<<" with type float"<<endl;
+	fChain->Branch(name.c_str(),ptr,Form("%s[%s]/F",name.c_str(),n.c_str()));	
+	out.isFilled[name]=1;
+}
+void Filler::SetBranchArray(string name, double* ptr,string n)
+{
+	if (!isActive(name) ) return;
+	cout<<"[Filler]::[SetBranchArray]Setting address for branch "<<name<<" with type double"<<endl;
+	fChain->Branch(name.c_str(),ptr,Form("%s[%s]/D",name.c_str(),n.c_str()));	
+	out.isFilled[name]=1;
+}
 
 void Filler::Init()
 {
@@ -101,6 +137,7 @@ void Filler::Init()
 
 void Filler::Write(){
 	cout<<"[Filler]::[Write] Tree "<<endl;
+	fOut->cd();
 	fChain->Print();
 	fChain->Write();
 	//fOut->Close();
@@ -128,40 +165,40 @@ void Filler::SetBranchesH4tree()
 	SetBranchAddress("evtTimeDist"	,&out.evtTimeDist );
 	SetBranchAddress("evtTimeStart"	,&out.evtTimeStart );
 	SetBranchAddress("nEvtTimes"	,&out.nEvtTimes );
-	SetBranchAddress("evtTime"	,&out.evtTime[0] );
-	SetBranchAddress("evtTimeBoard"	,&out.evtTimeBoard[0]);
+	SetBranchArray("evtTime"	,&out.evtTime[0] 	,"nEvtTimes");
+	SetBranchArray("evtTimeBoard"	,&out.evtTimeBoard[0]	,"nEvtTimes");
 
 	SetBranchAddress("nAdcChannels"	,&out.nAdcChannels);
-	SetBranchAddress("adcBoard"	,&out.adcBoard[0]);
-	SetBranchAddress("adcChannel"	,&out.adcChannel[0]);
-	SetBranchAddress("adcData"	,&out.adcData[0]);
+	SetBranchArray("adcBoard"	,&out.adcBoard[0]	,"nAdcChannels");
+	SetBranchArray("adcChannel"	,&out.adcChannel[0]	,"nAdcChannels");
+	SetBranchArray("adcData"	,&out.adcData[0]	,"nAdcChannels");
                                           
 	SetBranchAddress("nTdcChannels"	,&out.nTdcChannels);
-	SetBranchAddress("tdcBoard"	,&out.tdcBoard[0]);
-	SetBranchAddress("tdcChannel"	,&out.tdcChannel[0]);
-	SetBranchAddress("tdcData"	,&out.tdcData[0]);
+	SetBranchArray("tdcBoard"	,&out.tdcBoard[0]	,"nTdcChannels");
+	SetBranchArray("tdcChannel"	,&out.tdcChannel[0]	,"nTdcChannels");
+	SetBranchArray("tdcData"	,&out.tdcData[0]	,"nTdcChannels");
                                          
 	SetBranchAddress("nDigiSamples"	,&out.nDigiSamples);
-	SetBranchAddress("digiFrequency",&out.digiFrequency[0]);
-	SetBranchAddress("digiGroup"	,&out.digiGroup[0]);
-	SetBranchAddress("digiChannel"	,&out.digiChannel[0]);
-	SetBranchAddress("digiSampleIndex",&out.digiSampleIndex[0]);
-	SetBranchAddress("digiSampleValue"	,&out.digiSampleValue[0]);
-	SetBranchAddress("digiSampleValueSub"	,&out.digiSampleValueSub[0]);
-	SetBranchAddress("digiBoard"	,&out.digiBoard[0]);
+	SetBranchArray("digiFrequency",&out.digiFrequency[0]	,"nDigiSamples");
+	SetBranchArray("digiGroup"	,&out.digiGroup[0]	,"nDigiSamples");
+	SetBranchArray("digiChannel"	,&out.digiChannel[0]	,"nDigiSamples");
+	SetBranchArray("digiSampleIndex"	,&out.digiSampleIndex[0],"nDigiSamples");
+	SetBranchArray("digiSampleValue"	,&out.digiSampleValue[0],"nDigiSamples");
+	SetBranchArray("digiSampleValueSub"	,&out.digiSampleValueSub[0],"nDigiSamples");
+	SetBranchArray("digiBoard"	,&out.digiBoard[0]	,"nDigiSamples");
                                           
 	SetBranchAddress("nScalerWords"	,&out.nScalerWords);
-	SetBranchAddress("scalerWord"	,&out.scalerWord[0]);
-	SetBranchAddress("scalerBoard"	,&out.scalerBoard[0]);
+	SetBranchArray("scalerWord"	,&out.scalerWord[0]	,"nScalerWords");
+	SetBranchArray("scalerBoard"	,&out.scalerBoard[0]	,"nScalerWords");
                                          
 	SetBranchAddress("nPatterns"	,&out.nPatterns);
-	SetBranchAddress("pattern"	,&out.pattern[0]);
-	SetBranchAddress("patternBoard"	,&out.patternBoard[0]);
-	SetBranchAddress("patternChannel",&out.patternChannel[0]);
+	SetBranchArray("pattern"	,&out.pattern[0]	,"nPatterns");
+	SetBranchArray("patternBoard"	,&out.patternBoard[0]	,"nPatterns");
+	SetBranchArray("patternChannel",&out.patternChannel[0]	,"nPatterns");
                                                
 	SetBranchAddress("nTriggerWords",&out.nTriggerWords);
-	SetBranchAddress("triggerWords"	,&out.triggerWords[0]);
-	SetBranchAddress("triggerWordsBoard",&out.triggerWordsBoard[0]);
+	SetBranchArray("triggerWords"	,&out.triggerWords[0]	,"nTriggerWords");
+	SetBranchArray("triggerWordsBoard",&out.triggerWordsBoard[0],"nTriggerWords");
 
 
 }

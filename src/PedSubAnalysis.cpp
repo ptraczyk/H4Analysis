@@ -23,6 +23,8 @@ void PedSubAnalysis::AnalyzeEvent()
 		valSub=digiSampleValue-sub;
 		}
 		l->digiSampleValueSub[iSample]=valSub;
+		//if (digiChannel==0) cout<<" iSample="<<iSample<<" ch0 x:"<<digiSampleIndex<<" y:"<<digiSampleValue<<" y'="<<valSub<<" == "<<l->digiSampleValueSub[iSample]<<endl; //DEBUG
+		
 		
 	}
 

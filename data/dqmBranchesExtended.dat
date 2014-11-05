@@ -19,14 +19,22 @@ HODOX1
 HODOX2
 HODOY1
 HODOY2
-nDigiSamples
-digiFrequency
-digiGroup
-digiChannel
-digiSampleIndex
-digiSampleValue
-digiBoard
+
+## EXTEND WITH DIGI INFO -- UNCOMMENT FOR DEBUG PURPOSES
+## nDigiSamples
+## digiFrequency
+## digiGroup
+## digiChannel
+## digiSampleIndex
+## digiSampleValue
+## digiBoard
+## 
+## digiSampleValueSub
+
 ### EXTENDED
+runNumber
+evtNumber
+spillNumber
 digi_charge_integrated_sub
 digi_max_amplitude_sub
 digi_pedestal_sub

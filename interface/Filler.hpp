@@ -29,6 +29,12 @@ protected:
 	void SetBranchAddress(string name,float* ptr);
 	void SetBranchAddress(string name,double* ptr);
 
+	void SetBranchArray(string name,unsigned long long* ptr,string n);
+	void SetBranchArray(string name,unsigned int* ptr,string n);
+	void SetBranchArray(string name,int* ptr,string n);
+	void SetBranchArray(string name,float* ptr,string n);
+	void SetBranchArray(string name,double* ptr,string n);
+
 	void SetBranchAddress(string name,vector<float>** 	ptr);
 	void SetBranchAddress(string name,vector<double>** 	ptr);
 	void SetBranchAddress(string name,vector<unsigned int>** ptr);
