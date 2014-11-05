@@ -43,6 +43,7 @@ for (unsigned int iSample=0;iSample< l->nDigiSamples;iSample++)
  UInt_t digiChannel = l->digiChannel[iSample] + 8*digiGroup; // update this in order to consider also the group. for us the group is always 0
  UInt_t digiSampleIndex = l->digiSampleIndex[iSample];
  Float_t digiSampleValue = l->digiSampleValue[iSample];
+	if (inputType==1) digiSampleValue=l->digiSampleValueSub[iSample];
  UInt_t digiFrequency = l->digiFrequency[iSample];
  if (digiChannel >= nChannels) continue;
  waveforms[ digiChannel ]-> addTimeAndSample(digiSampleIndex *timeSampleUnit(digiFrequency), digiSampleValue);
@@ -54,10 +55,18 @@ for (unsigned int iSample=0;iSample< l->nDigiSamples;iSample++)
 	waveforms[i]->rescale(-1);
 	float max_ampl=waveforms[i]->max_amplitude(50,300,5).max_amplitude;
 	float chg_int =waveforms[i]->charge_integrated(0,900);
-	if (l->digi_max_amplitude != NULL)	{ l->digi_max_amplitude->push_back(max_ampl); }
-	if (l->digi_pedestal != NULL)		{ l->digi_pedestal->push_back(ped.pedestal); }
-	if (l->digi_pedestal_rms != NULL)	{ l->digi_pedestal_rms->push_back(ped.rms); }
-	if (l->digi_charge_integrated  !=NULL) 	{ l->digi_charge_integrated->push_back(chg_int) ;}
+	if (inputType==0){
+		if (l->digi_max_amplitude != NULL)	{ l->digi_max_amplitude->push_back(max_ampl); }
+		if (l->digi_pedestal != NULL)		{ l->digi_pedestal->push_back(ped.pedestal); }
+		if (l->digi_pedestal_rms != NULL)	{ l->digi_pedestal_rms->push_back(ped.rms); }
+		if (l->digi_charge_integrated  !=NULL) 	{ l->digi_charge_integrated->push_back(chg_int) ;}
+		}
+	else if (inputType==1)	{
+		if (l->digi_max_amplitude_sub != NULL)	{ l->digi_max_amplitude_sub->push_back(max_ampl); }
+		if (l->digi_pedestal_sub != NULL)		{ l->digi_pedestal_sub->push_back(ped.pedestal); }
+		if (l->digi_pedestal_rms_sub != NULL)	{ l->digi_pedestal_rms_sub->push_back(ped.rms); }
+		if (l->digi_charge_integrated_sub  !=NULL) 	{ l->digi_charge_integrated_sub->push_back(chg_int) ;}
+		}
 	}	
  return;
 }

@@ -16,7 +16,8 @@ public:
 	int nChannels;
 	int minPed;
 	int maxPed;
-	SimpleAnalysis(){minPed=5; maxPed=44; nChannels=0;};
+	int inputType; // 0 = base; 1=sub
+	SimpleAnalysis(){minPed=5; maxPed=44; nChannels=0; inputType=0;};
 	~SimpleAnalysis(){};
 	void Init(LoopAndFill *l1); // { l = l1 ; };
 	void AnalyzeEvent();

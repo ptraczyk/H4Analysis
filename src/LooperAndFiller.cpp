@@ -61,6 +61,7 @@ void LoopAndFill::Fill(){
 	CopyArray(digiChannel,out.digiChannel,nDigiSamples);
 	CopyArray(digiSampleIndex,out.digiSampleIndex,nDigiSamples);
 	CopyArray(digiSampleValue,out.digiSampleValue,nDigiSamples);
+	CopyArray(digiSampleValueSub,out.digiSampleValueSub,nDigiSamples);
 	CopyArray(digiBoard,out.digiBoard,nDigiSamples);
 
 	CopyArray(scalerWord,out.scalerWord,nScalerWords);
@@ -96,6 +97,12 @@ void LoopAndFill::Fill(){
 	out.BeamEnergy = BeamEnergy;
 	out.BeamTilt = BeamTilt;
 	out.IsPhysics = IsPhysics;
+	
+	//  Sub
+ 	CopyVector(digi_charge_integrated_sub,out.digi_charge_integrated_sub);
+ 	CopyVector(digi_max_amplitude_sub    ,out.digi_max_amplitude_sub);
+ 	CopyVector(digi_pedestal_sub         ,out.digi_pedestal_sub);
+ 	CopyVector(digi_pedestal_rms_sub     ,out.digi_pedestal_rms_sub);
 	
 	Filler::Fill();	
 }

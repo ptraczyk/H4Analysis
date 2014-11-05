@@ -147,6 +147,7 @@ void Filler::SetBranchesH4tree()
 	SetBranchAddress("digiChannel"	,&out.digiChannel[0]);
 	SetBranchAddress("digiSampleIndex",&out.digiSampleIndex[0]);
 	SetBranchAddress("digiSampleValue"	,&out.digiSampleValue[0]);
+	SetBranchAddress("digiSampleValueSub"	,&out.digiSampleValueSub[0]);
 	SetBranchAddress("digiBoard"	,&out.digiBoard[0]);
                                           
 	SetBranchAddress("nScalerWords"	,&out.nScalerWords);
@@ -197,6 +198,10 @@ void Filler::SetBranchesOuttree(){
 	SetBranchAddress("BeamTilt",&out.BeamTilt);
 	SetBranchAddress("IsPhysics",&out.IsPhysics);
 
+	SetBranchAddress("digi_charge_integrated_sub"	,&out.digi_charge_integrated_sub);
+	SetBranchAddress("digi_max_amplitud_sub"	,&out.digi_max_amplitude_sub);
+	SetBranchAddress("digi_pedesta_sub"		,&out.digi_pedestal_sub);
+	SetBranchAddress("digi_pedestal_rm_sub"		,&out.digi_pedestal_rms_sub);
 }
 
 bool Filler::isActive(string name)

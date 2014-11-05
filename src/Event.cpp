@@ -18,6 +18,10 @@ tree::tree(){
 	HODOY1    =new              vector<bool>  ; 
 	HODOY2    =new              vector<bool>  ; 
 
+	digi_charge_integrated_sub =new vector<float> ; 
+	digi_max_amplitude_sub =new     vector<float> ; 
+	digi_pedestal_sub =new          vector<float> ; 
+	digi_pedestal_rms_sub =new      vector<float> ; 
 }
 
 tree::~tree(){
@@ -36,4 +40,9 @@ tree::~tree(){
 	delete HODOX2    ;
 	delete HODOY1    ;
 	delete HODOY2    ;
+
+	delete digi_charge_integrated_sub ;
+	delete digi_max_amplitude_sub ;
+	delete digi_pedestal_sub ;
+	delete digi_pedestal_rms_sub ;
 }

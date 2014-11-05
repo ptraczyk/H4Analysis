@@ -46,6 +46,7 @@ map<string,bool> isFilled;
 	UInt_t digiChannel[MAX_DIGI_SAMPLES];
 	UInt_t digiSampleIndex[MAX_DIGI_SAMPLES];
 	Float_t digiSampleValue[MAX_DIGI_SAMPLES];
+	Float_t digiSampleValueSub[MAX_DIGI_SAMPLES];
 	UInt_t digiBoard[MAX_DIGI_SAMPLES];
 	UInt_t nScalerWords;
 	UInt_t scalerWord[MAX_SCALER_WORDS];
@@ -69,6 +70,12 @@ map<string,bool> isFilled;
  	vector<float>  *digi_time_at_frac30 ;
  	vector<float>  *digi_time_at_frac50 ;
  	vector<float>  *digi_time_at_max ;
+	// --- sub
+ 	vector<float>  *digi_charge_integrated_sub ;
+ 	vector<float>  *digi_max_amplitude_sub ;
+ 	vector<float>  *digi_pedestal_sub ;
+ 	vector<float>  *digi_pedestal_rms_sub ;
+	
  	vector<bool>   *HODOX1    ;
  	vector<bool>   *HODOX2    ;
  	vector<bool>   *HODOY1    ;

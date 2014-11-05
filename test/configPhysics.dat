@@ -1,0 +1,13 @@
+######## Input Files #######
+InputBranches=data/unpackBranches.dat
+include=data/physicsRuns.dat
+
+######## Output File #######
+OutputBranches=data/dqmBranchesExtended.dat
+OutputBranches=data/minimalBranches.dat
+
+####### Analysis #######
+Analysis=PromptRecoAnalysis,DatabaseReadAnalysis,PedSubAnalysis,SimpleAnalysis
+config=DatabaseReadAnalysis databasename="sqlite://data/CeF3_H4DFall2014_analysisdb.sqlite" tablename="cef3"
+config=PedSubAnalysis pedestalFileName=data/pedestal.root nChannels=4 HV.push_back(650) HV.push_back(700) HV.push_back(950) HV.push_back(600)
+config=SimpleAnalysis nChannels=4 inputType=1

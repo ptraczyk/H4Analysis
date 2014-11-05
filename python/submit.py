@@ -29,6 +29,7 @@ if opts.tar:
 	cmd.extend( glob("bin/*so" ) )
 	cmd.extend( glob("data/*dat" ) )
 	cmd.extend( glob("data/*sqlite" ) )
+	cmd.extend( glob("data/*root" ) )
 	cmd.extend( glob("python/*py") )
 	cmd.extend( glob("test/*") )
 	print " ".join(cmd)

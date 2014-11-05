@@ -54,6 +54,7 @@ void Looper::SetBranchesH4tree()
 	SetBranchAddress("digiChannel",&digiChannel[0]);
 	SetBranchAddress("digiSampleIndex",&digiSampleIndex[0]);
 	SetBranchAddress("digiSampleValue",&digiSampleValue[0]);
+	SetBranchAddress("digiSampleValueSub",&digiSampleValueSub[0]);
 	SetBranchAddress("digiBoard",&digiBoard[0]);
                                                
 	SetBranchAddress("nScalerWords",&nScalerWords);
@@ -102,6 +103,11 @@ void Looper::SetBranchesOuttree(){
 	SetBranchAddress("BeamEnergy",&BeamEnergy);
 	SetBranchAddress("BeamTilt",&BeamTilt);
 	SetBranchAddress("IsPhysics",&IsPhysics);
-
+	
+	//SUB
+	SetBranchAddress("digi_charge_integrated_sub"	,&digi_charge_integrated_sub);
+	SetBranchAddress("digi_max_amplitude_sub"	,&digi_max_amplitude_sub);
+	SetBranchAddress("digi_pedestal_sub"		,&digi_pedestal_sub);
+	SetBranchAddress("digi_pedestal_rms_sub"	,&digi_pedestal_rms_sub);
 
 }
