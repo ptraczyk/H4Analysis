@@ -14,23 +14,26 @@ def ParseInputFile(fileName):
 			K=ParseInputFile(parts[1])
 			#copy and update
 			for key in K:
+				if key == 'config': continue
 				R[key]=K[key];
+			for key in K['config']: ## update also config
+				R['config'][key]=K['config'][key]
 		#VALUES
-		if parts[0] == 'OutputFile':
+		elif parts[0] == 'OutputFile':
 			R[ parts[0] ] = parts[1]
 		#VECTORS
-		if parts[0] == 'HV' or \
+		elif parts[0] == 'HV' or \
 			parts[0] == 'InputFiles' or  \
 			parts[0] == 'Analysis' :
 			R[parts[0]]='='.join(parts[1:]).split(',');
 		#TABLES
-		if parts[0] == 'ENERGIES' or parts[0] == 'PEDESTAL':
+		elif parts[0] == 'ENERGIES' or parts[0] == 'PEDESTAL':
 			table=parts[1].split(';'); 
 			R[parts[0]]=[]
 			for row in table:
 				R[parts[0]] += row.split(',')
 		# FILES
-		if parts[0]=='InputBranches' or parts[0] == 'OutputBranches':
+		elif parts[0]=='InputBranches' or parts[0] == 'OutputBranches':
 			R[parts[0]]=[]
 			fileList=parts[1].split(',')
 			for fName in fileList:
@@ -40,20 +43,27 @@ def ParseInputFile(fileName):
 					br= re.sub('\n','',br)
 					if br == "": continue
 					R[parts[0]].append( br )
-		### INPUT RUNS
-		if parts[0] =='InputRuns':
-			R[ 'InputFiles' ] = []
-			template=parts[1].split(' ')[0]
-			runs=parts[1].split(' ')[1].split(',')
-			R[ 'InputFiles' ]= [ re.sub('%%RUN%%',x,template) for x in runs ]
 		###CONFIG ANALYSIS
-		if parts[0]=='config':
+		elif parts[0]=='config':
+			#print "Parsing configuration Line:",line ###DEBUG
 			configline='='.join(parts[1:]).split(' ')
 			Analysis=configline[0]
 			R[ parts[0] ][ Analysis ]=[]
 			for i in range(1,len( configline)):
 				#print "Config Line for analysis ", Analysis , " is ",configline[i]
 				R[ parts[0] ][ Analysis ].append( configline[i] )
+			#print "config is now:",R['config'] ### DEBUG
+		### INPUT RUNS
+		elif parts[0] =='InputRuns':
+			print "--- InputRuns ---"	
+			R[ 'InputFiles' ] = []
+			template=parts[1].split(' ')[0]
+			runs=parts[1].split(' ')[1].split(',')
+			R[ 'InputFiles' ]= [ re.sub('%%RUN%%',x,template) for x in runs ]
+			print R['InputFiles']
+			print "----------------"
+		else:
+			if parts[0] != "" : print "Ignoring line:",line
 			
 	return R
 def PrintConfiguration(config):

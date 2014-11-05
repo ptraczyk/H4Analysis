@@ -1,5 +1,5 @@
 InputBranches=data/unpackBranches.dat
-OutputBranches=None
+OutputBranches=data/noneBranches.dat
 Analysis=DatabaseReadAnalysis,PedestalAnalysis
 config=DatabaseReadAnalysis databasename="sqlite://data/CeF3_H4DFall2014_analysisdb.sqlite" tablename="cef3"
 config=PedestalAnalysis nChannels=4 HV.push_back(650) HV.push_back(700) HV.push_back(950) HV.push_back(600)
@@ -8,4 +8,4 @@ config=PedestalAnalysis nChannels=4 HV.push_back(650) HV.push_back(700) HV.push_
 #InputFiles=/scratch/peruzzi/DQM_TB3/516/10.root
 #
 include=data/pedestalRuns.dat
-OutFile=PedestalHisto.root
+OutputFile=PedestalHisto.root

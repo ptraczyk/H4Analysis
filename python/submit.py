@@ -28,6 +28,7 @@ if opts.tar:
 	cmd=["tar","-czf","%s/package.tar.gz"%opts.dir]
 	cmd.extend( glob("bin/*so" ) )
 	cmd.extend( glob("data/*dat" ) )
+	cmd.extend( glob("data/*sqlite" ) )
 	cmd.extend( glob("python/*py") )
 	cmd.extend( glob("test/*") )
 	print " ".join(cmd)
@@ -86,7 +87,7 @@ for iJob in range(0,opts.njobs):
 	call(["chmod","u+x","%s/sub%d.sh"%(opts.dir,iJob)])
 	
 	## submit
-	cmd=["qsub","-b","y","%s/sub%d.sh"%(basedir,iJob)]
+	cmd=["qsub","-b","y","-o","%s/log%d.txt"%(basedir,iJob),"-e","%s/log%d.txt"%(basedir,iJob),"%s/sub%d.sh"%(basedir,iJob)]
 	cmdline=' '.join(cmd)
 	print cmdline
 	if not opts.dryrun: 
