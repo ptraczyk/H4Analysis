@@ -6,11 +6,11 @@
 
 using namespace std;
 
-RunDBInterface::RunDBInterface(TString address, TString database, TString table, TString user, TString password){
+RunDBInterface::RunDBInterface(TString address, TString table, TString user, TString password){
   mymap = new TMap();
-  db = TSQLServer::Connect(Form("mysql://%s/%s",address.Data(),database.Data()), user.Data(), password.Data());
+  db = TSQLServer::Connect(address.Data(), user.Data(), password.Data());
   if (!db) {
-    cout << "Error in opening MySQL database" << endl;
+    cout << "Error in opening database" << endl;
     return;
   }
   table_ = table;
@@ -35,16 +35,18 @@ void RunDBInterface::LoadRun(Int_t run_number){
     return;
   }
   int nfields = res->GetFieldCount();
-  int nrows = res->GetRowCount();
+  TSQLRow *row = NULL;
 
-  for (int i=0; i < nrows; i++) {
+  while (true) {
     TSQLRow *row = res->Next();
+    if (!row) break;
     for (int j = 0; j < nfields; j++) {
       TObjString *key = new TObjString(res->GetFieldName(j));
       TObjString *val = new TObjString(row->GetField(j));
       mymap->Add((TObject*)key,(TObject*)val);
     }
   }
+
 }
 
 TMap* RunDBInterface::GetMap(){

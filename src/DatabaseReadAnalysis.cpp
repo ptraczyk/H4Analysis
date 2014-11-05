@@ -26,7 +26,7 @@ void DatabaseReadAnalysis::Init(LoopAndFill *l1)
 	cout<<"[DatabaseReadAnalysis]::[Init]"<<endl;
 	BaseAnalysis::Init(l1);
 
-	mydb = new RunDBInterface("pcethtb2.cern.ch","rundb_v2_analysis","cef3","cmsdaq_ro","dummypwd");
+	mydb = new RunDBInterface(databasename,tablename,"","");
 	loaded = false;
 
 	cout<<"[DatabaseReadAnalysis]::[Init]::Done"<<endl;
