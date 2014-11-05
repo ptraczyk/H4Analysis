@@ -7,7 +7,7 @@ void PlotAnalysis::Init(LoopAndFill *l1)
 	for(unsigned int i=0;i<E.size() ;++i)
 	   for( unsigned int iCh=0;iCh<nChannels;++iCh)
 		{
-		cout<<"[PlotAnalysis]::[Init] Histo ch="<<iCh<<"/"<<nChannels<<"E="<<E[i]<<endl;
+		cout<<"[PlotAnalysis]::[Init] Histo ch="<<iCh<<"/"<<nChannels<<" E="<<E[i]<<endl;
 		l->BookHisto(Form("tprofile_chint_sub_ch%d_E%d",iCh,E[i]),"ch_int_sub vs HV",2000,-0.5,1999.5,"TProfile");
 		l->BookHisto(Form("tprofile_maxampl_sub_ch%d_E%d",iCh,E[i]),"ch_int_sub vs HV",2000,-0.5,1999.5,"TProfile");
 		}

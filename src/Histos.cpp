@@ -22,6 +22,7 @@ void Histos::FillProfile(string name, double x,double y, double weight)
 	}
 void Histos::Write()
 	{
+	fOut->cd();
 	map<string,TH1*>::iterator it;
 	for( it=histoContainer.begin(); it!=histoContainer.end() ;it++)
 		{
