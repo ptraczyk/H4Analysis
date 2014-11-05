@@ -4,11 +4,19 @@
 
 void DatabaseReadAnalysis::AnalyzeEvent()
 {
+// do caching correctly
+  static int lastRun=-1;
+
+  if ( l->runNumber == lastRun) loaded=true;
+  else loaded = false;
+
 
   if (!loaded) {
     mydb->LoadRun(l->runNumber);
-    loaded = true;
+    //loaded = true;
   }
+
+  lastRun=l->runNumber;
 
   l->TableX = mydb->Get("table_horizontal_position").Atof();
   l->TableY = mydb->Get("table_vertical_position").Atof();
