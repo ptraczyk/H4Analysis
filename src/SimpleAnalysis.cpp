@@ -2,6 +2,7 @@
 
 void SimpleAnalysis::Init(LoopAndFill *l1)
 {
+	cout<<"[SimpleAnalysis]::[Init]"<<endl;
 	BaseAnalysis::Init(l1);
 	if( ! ( l1->inputBranches["digiChannel"] and l1->inputBranches["digiSampleIndex"] and l1->inputBranches["digiSampleValue"] ) )
 		{
@@ -16,6 +17,7 @@ void SimpleAnalysis::Init(LoopAndFill *l1)
 		{
 		waveforms.push_back(new Waveform());
 		}
+	cout<<"[SimpleAnalysis]::[Init] Done"<<endl;
 }
 
 void SimpleAnalysis::ClearEvent()
@@ -25,10 +27,18 @@ for(unsigned int i=0;i<waveforms.size() ;++i)
 	{
 	waveforms[i]->clear();
 	}
-if (l->digi_max_amplitude != NULL) 	l->digi_max_amplitude->clear();
-if (l->digi_pedestal != NULL) 		l->digi_pedestal->clear();
-if (l->digi_charge_integrated != NULL) 	l->digi_charge_integrated->clear();
-if (l->digi_pedestal_rms != NULL) 	l->digi_pedestal_rms->clear();
+if (inputType==0){
+	if (l->digi_max_amplitude != NULL) 	l->digi_max_amplitude->clear();
+	if (l->digi_pedestal != NULL) 		l->digi_pedestal->clear();
+	if (l->digi_charge_integrated != NULL) 	l->digi_charge_integrated->clear();
+	if (l->digi_pedestal_rms != NULL) 	l->digi_pedestal_rms->clear();
+}
+else if (inputType==1){
+	if (l->digi_max_amplitude_sub != NULL) 		l->digi_max_amplitude_sub->clear();
+	if (l->digi_pedestal_sub != NULL) 		l->digi_pedestal_sub->clear();
+	if (l->digi_charge_integrated_sub != NULL) 	l->digi_charge_integrated_sub->clear();
+	if (l->digi_pedestal_rms_sub != NULL) 		l->digi_pedestal_rms_sub->clear();
+}
 
 }
 
@@ -63,9 +73,9 @@ for (unsigned int iSample=0;iSample< l->nDigiSamples;iSample++)
 		}
 	else if (inputType==1)	{
 		if (l->digi_max_amplitude_sub != NULL)	{ l->digi_max_amplitude_sub->push_back(max_ampl); }
-		if (l->digi_pedestal_sub != NULL)		{ l->digi_pedestal_sub->push_back(ped.pedestal); }
+		if (l->digi_pedestal_sub != NULL)	{ l->digi_pedestal_sub->push_back(ped.pedestal); }
 		if (l->digi_pedestal_rms_sub != NULL)	{ l->digi_pedestal_rms_sub->push_back(ped.rms); }
-		if (l->digi_charge_integrated_sub  !=NULL) 	{ l->digi_charge_integrated_sub->push_back(chg_int) ;}
+		if (l->digi_charge_integrated_sub  !=NULL) { l->digi_charge_integrated_sub->push_back(chg_int) ;}
 		}
 	}	
  return;

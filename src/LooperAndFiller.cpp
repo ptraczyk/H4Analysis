@@ -27,6 +27,7 @@ void LoopAndFill::Close()
 }
 
 void LoopAndFill::Fill(){
+	StartWatch(); 
 	// I cannot use virtual Inheritance because we have vectors
 	// otherwise I would have done it ;-)
 	//copy from this to out->
@@ -38,8 +39,8 @@ void LoopAndFill::Fill(){
 	out.evtTimeDist = evtTimeDist;
 	out.evtTimeStart = evtTimeStart;
 	out.nEvtTimes = nEvtTimes;
-	CopyArray(evtTime,out.evtTime,nEvtTimes);
-	CopyArray(evtTimeBoard,out.evtTimeBoard,nEvtTimes);
+	if(activeBranches["evtTime"]) 	CopyArray(evtTime,out.evtTime,nEvtTimes);
+	if(activeBranches["evtTimeBoard"])CopyArray(evtTimeBoard,out.evtTimeBoard,nEvtTimes);
 
 	out.nAdcChannels = nAdcChannels;
 	out.nTdcChannels= nTdcChannels;
@@ -48,31 +49,31 @@ void LoopAndFill::Fill(){
 	out.nPatterns=    nPatterns;
 	out.nTriggerWords=nTriggerWords;
 
-	CopyArray(adcBoard,out.adcBoard,nAdcChannels);
-	CopyArray(adcChannel,out.adcChannel,nAdcChannels);
-	CopyArray(adcData,out.adcData,nAdcChannels);
-	
-	CopyArray(tdcBoard,out.tdcBoard,nTdcChannels);
-	CopyArray(tdcChannel,out.tdcChannel,nTdcChannels);
-	CopyArray(tdcData,out.tdcData,nTdcChannels);
+	if(activeBranches["adcBoard"])CopyArray(adcBoard,out.adcBoard,nAdcChannels);
+	if(activeBranches["adcChannel"])CopyArray(adcChannel,out.adcChannel,nAdcChannels);
+	if(activeBranches["adcData"])CopyArray(adcData,out.adcData,nAdcChannels);
 
-	CopyArray(digiFrequency,out.digiFrequency,nDigiSamples);
-	CopyArray(digiGroup,out.digiGroup,nDigiSamples);
-	CopyArray(digiChannel,out.digiChannel,nDigiSamples);
-	CopyArray(digiSampleIndex,out.digiSampleIndex,nDigiSamples);
-	CopyArray(digiSampleValue,out.digiSampleValue,nDigiSamples);
-	CopyArray(digiSampleValueSub,out.digiSampleValueSub,nDigiSamples);
-	CopyArray(digiBoard,out.digiBoard,nDigiSamples);
+	if(activeBranches["tdcBoard"])CopyArray(tdcBoard,out.tdcBoard,nTdcChannels);
+	if(activeBranches["tdcChannel"])CopyArray(tdcChannel,out.tdcChannel,nTdcChannels);
+	if(activeBranches["tdcData"])CopyArray(tdcData,out.tdcData,nTdcChannels);
 
-	CopyArray(scalerWord,out.scalerWord,nScalerWords);
-	CopyArray(scalerBoard,out.scalerBoard,nScalerWords);
+	if(activeBranches["digiFrequency"])CopyArray(digiFrequency,out.digiFrequency,nDigiSamples);
+	if(activeBranches["digiGroup"])CopyArray(digiGroup,out.digiGroup,nDigiSamples);
+	if(activeBranches["digiChannel"])CopyArray(digiChannel,out.digiChannel,nDigiSamples);
+	if(activeBranches["digiSampleIndex"])CopyArray(digiSampleIndex,out.digiSampleIndex,nDigiSamples);
+	if(activeBranches["digiSampleValue"])CopyArray(digiSampleValue,out.digiSampleValue,nDigiSamples);
+	if(activeBranches["digiSampleValueSub"])CopyArray(digiSampleValueSub,out.digiSampleValueSub,nDigiSamples);
+	if(activeBranches["digiBoard"])CopyArray(digiBoard,out.digiBoard,nDigiSamples);
 
-	CopyArray(pattern,out.pattern,nPatterns);
-	CopyArray(patternBoard,out.patternBoard,nPatterns);
-	CopyArray(patternChannel,out.patternChannel,nPatterns);
+	if(activeBranches["scalerWord"])CopyArray(scalerWord,out.scalerWord,nScalerWords);
+	if(activeBranches["scalerBoard"])CopyArray(scalerBoard,out.scalerBoard,nScalerWords);
 
-	CopyArray(triggerWords,out.triggerWords,nTriggerWords);
-	CopyArray(triggerWordsBoard,out.triggerWordsBoard,nTriggerWords);
+	if(activeBranches["pattern"])CopyArray(pattern,out.pattern,nPatterns);
+	if(activeBranches["patternBoard"])CopyArray(patternBoard,out.patternBoard,nPatterns);
+	if(activeBranches["patternChannel"])CopyArray(patternChannel,out.patternChannel,nPatterns);
+
+	if(activeBranches["triggerWords"])CopyArray(triggerWords,out.triggerWords,nTriggerWords);
+	if(activeBranches["triggerWordsBoard"])CopyArray(triggerWordsBoard,out.triggerWordsBoard,nTriggerWords);
 	// ---- dqmTree ----
  	CopyVector(ADCvalues             ,out.ADCvalues);
  	CopyVector(BGOvalues             ,out.BGOvalues);
@@ -105,6 +106,7 @@ void LoopAndFill::Fill(){
  	CopyVector(digi_pedestal_rms_sub     ,out.digi_pedestal_rms_sub);
 	
 	Filler::Fill();	
+	StopWatch();
 }
 
 void LoopAndFill::Write(){

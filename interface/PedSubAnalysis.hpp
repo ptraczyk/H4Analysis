@@ -10,7 +10,8 @@ class PedSubAnalysis : public BaseAnalysis
  *
  */
 TFile *pedFile;
-map<string,TProfile*> pedHisto;
+//map<string,TProfile*> pedHisto;
+map<pair<int,int>,TProfile*> pedHisto; //ch-HV
 public:
 	PedSubAnalysis(){pedFile=NULL;};
 	~PedSubAnalysis(){Close();};

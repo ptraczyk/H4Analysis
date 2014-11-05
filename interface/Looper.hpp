@@ -33,7 +33,12 @@ public:
 	void Init();
 	void SetBranches(string tree="H4tree");
 	template<class T> void SetBranchAddress(string name,T ptr);
-	inline void GetEntry( ULong64_t iEntry){ StartWatch(); fChain->GetEntry(iEntry); StopWatch(); };
+	inline void GetEntry( ULong64_t iEntry){ 
+			StartWatch(); 
+			fChain->GetEntry(iEntry); 
+			//fChain->Show();  //DEBUG
+			//cout <<" Branch: digiSampleValueSub is"<<fChain->GetBranchStatus("digiSampleValueSub")<<endl;
+			StopWatch(); };
 	inline long GetEntries() { return fChain->GetEntries(); }
 
 };
@@ -48,8 +53,9 @@ void Looper::SetBranchAddress(string name,T ptr)
 	{
 	map<string,int>::iterator it;
 	it=inputBranches.find(name);
-	if (it != inputBranches.end() ){
-		fChain->SetBranchStatus(name.c_str(),1);
+	if (it != inputBranches.end() && inputBranches[name] ){
+		//this is done with a TRegexp
+		fChain->SetBranchStatus(("^"+name+"$").c_str(),1);
  		isFilled[name]=1; 
   		cout<<"* Setting Branch Address For Branch:"<<name<<endl;
 		}

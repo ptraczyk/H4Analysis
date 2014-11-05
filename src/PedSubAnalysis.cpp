@@ -18,12 +18,16 @@ void PedSubAnalysis::AnalyzeEvent()
 		Float_t valSub=0;
 		if( digiChannel <unsigned(nChannels)) 
 		{
-		string name=Form("tprofile_pedestal_ch%d_HV%d",digiChannel,hv);
-		float sub=pedHisto[name]->GetBinContent( digiSampleIndex +1 );
+		//string name=Form("tprofile_pedestal_ch%d_HV%d",digiChannel,hv);
+		//float sub=pedHisto[name]->GetBinContent( digiSampleIndex +1 );
+		float sub=0;
+		if (pedHisto.find(pair<int,int>(digiChannel,hv)) != pedHisto.end() )
+			sub=pedHisto[pair<int,int>(digiChannel,hv)]->GetBinContent( digiSampleIndex +1 );
+		else
+			sub=pedHisto[pair<int,int>(digiChannel,0)]->GetBinContent( digiSampleIndex +1 );
 		valSub=digiSampleValue-sub;
 		}
 		l->digiSampleValueSub[iSample]=valSub;
-		//if (digiChannel==0) cout<<" iSample="<<iSample<<" ch0 x:"<<digiSampleIndex<<" y:"<<digiSampleValue<<" y'="<<valSub<<" == "<<l->digiSampleValueSub[iSample]<<endl; //DEBUG
 		
 		
 	}
@@ -52,7 +56,8 @@ void PedSubAnalysis::Init(LoopAndFill *l1)
 	   for( unsigned int iCh=0;iCh<unsigned(nChannels);++iCh)
 	      {
 		string name=Form("tprofile_pedestal_ch%d_HV%d",iCh,HV[iHV]);
-		pedHisto[name] = (TProfile*)pedFile->Get(name.c_str());
+		//pedHisto[name] = (TProfile*)pedFile->Get(name.c_str());
+		pedHisto[pair<int,int>(iCh,HV[iHV])] = (TProfile*)pedFile->Get(name.c_str());
 	      }
 	
 }

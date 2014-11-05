@@ -9,6 +9,8 @@ void Looper::AddToChain(string fileName)
 void Looper::Init()
 {
 	fChain=new TChain(chainName.c_str());
+	//for(auto br : inputBranches)
+	//for(map<string,int>::iterator br=inputBranches.begin();br!=inputBranches.end();br++){if(br->second)cout<<"[Looper]::[Init] Contains Branch:"<<br->first<<endl;}
 	SetBranches(chainName);
 }
 

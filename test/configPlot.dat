@@ -1,0 +1,13 @@
+######## Input Files #######
+InputBranches=test/plotBranches.dat
+#include=data/physicsRuns.dat
+InputFiles=physics/output*root
+chainName=outputTree
+
+######## Output File #######
+OutputBranches=data/noneBranches.dat
+OutputFile=plot.root
+
+####### Analysis #######
+Analysis=PlotAnalysis
+config=PlotAnalysis nChannels=4 E.push_back(10) E.push_back(15) E.push_back(20) E.push_back(50) E.push_back(100) E.push_back(150) E.push_back(200)

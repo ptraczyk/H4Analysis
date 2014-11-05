@@ -19,7 +19,7 @@ def ParseInputFile(fileName):
 			for key in K['config']: ## update also config
 				R['config'][key]=K['config'][key]
 		#VALUES
-		elif parts[0] == 'OutputFile':
+		elif parts[0] == 'OutputFile' or parts[0]=='chainName' or parts[0]=='outTreeName':
 			R[ parts[0] ] = parts[1]
 		#VECTORS
 		elif parts[0] == 'HV' or \
