@@ -1,0 +1,6 @@
+##cat mydatabase.txt  | grep PEDESTAL | cut -d ' ' -f 1 | tr '\n' ','
+##echo "/"{168,170,174,266,343,354,362,397,515,516,518,583}"/*.root | tr '\n' ','
+
+#inputFiles=dcap://t3se01.psi.ch:22125/pnfs/psi.ch/cms/trivcat/store/t3groups/ethz-ecal/testbeamH4_Fall2014/data/DQM_TB3/516/*root
+
+inputRuns=dcap://t3se01.psi.ch:22125/pnfs/psi.ch/cms/trivcat/store/t3groups/ethz-ecal/testbeamH4_Fall2014/data/DQM_TB3/%%RUN%%/*root 168,170,174,266,343,354,362,397,515,516,518,583

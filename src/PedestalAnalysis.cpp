@@ -6,12 +6,16 @@ void PedestalAnalysis::AnalyzeEvent()
 
 	for (unsigned int iSample=0;iSample< l->nDigiSamples;iSample++)
 	{
- 		UInt_t digiChannel = l->digiChannel[iSample];
  		UInt_t digiGroup   = l->digiGroup[iSample];
+ 		UInt_t digiChannel = l->digiChannel[iSample] + 8*digiGroup;
  		UInt_t digiSampleIndex = l->digiSampleIndex[iSample];
  		Float_t digiSampleValue = l->digiSampleValue[iSample];
+		int HV = int(l->CeF3HV);
 		if( digiChannel <nChannels) 
-			l->FillProfile( Form("tprofile_pedestal_ch%d_HV%d",digiChannel, 0 ),digiSampleIndex +1 , digiSampleValue );
+			{
+			l->FillProfile( Form("tprofile_pedestal_ch%d_HV%d",digiChannel, HV ),digiSampleIndex +1 , digiSampleValue );
+			l->FillProfile( Form("tprofile_pedestal_ch%d_HV%d",digiChannel, 0 ),digiSampleIndex +1 , digiSampleValue ); //fill 0 with everything
+			}
 	}
 	return;
 }

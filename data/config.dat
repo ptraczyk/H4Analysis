@@ -17,6 +17,6 @@ InputBranches=data/unpackBranches.dat
 OutputFile=output.root
 OutputBranches=data/minimalBranches.dat
 ####### Analysis #######
-Analysis=BaseAnalysis,PedestalAnalysis,SimpleAnalysis
+Analysis=BaseAnalysis,PedestalAnalysis,SimpleAnalysis,DatabaseReadAnalysis
 config=PedestalAnalysis nChannels=4 HV.push_back(600)
 config=SimpleAnalysis nChannels=4

@@ -1,5 +1,6 @@
 ######## Input Files #######
-InputFiles=516/1.root,516/2.root
+#InputFiles=516/1.root,516/2.root
+InputFiles=dcap://t3se01.psi.ch:22125/pnfs/psi.ch/cms/trivcat/store/t3groups/ethz-ecal/testbeamH4_Fall2014/data/DQM_TB3/516/*root
 InputBranches=data/unpackBranches.dat
 ######## Output File #######
 OutputFile=output.root

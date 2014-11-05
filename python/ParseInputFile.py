@@ -40,6 +40,12 @@ def ParseInputFile(fileName):
 					br= re.sub('\n','',br)
 					if br == "": continue
 					R[parts[0]].append( br )
+		### INPUT RUNS
+		if parts[0] =='InputRuns':
+			R[ 'InputFiles' ] = []
+			template=parts[1].split(' ')[0]
+			runs=parts[1].split(' ')[1].split(',')
+			R[ 'InputFiles' ]= [ re.sub('%%RUN%%',x,template) for x in runs ]
 		###CONFIG ANALYSIS
 		if parts[0]=='config':
 			configline='='.join(parts[1:]).split(' ')

@@ -40,7 +40,7 @@ for (unsigned int iSample=0;iSample< l->nDigiSamples;iSample++)
  //fill waveform
  //waveform->baseline(5,44); //use 40 samples between 5-44 to get pedestal and RMS
  UInt_t digiGroup   = l->digiGroup[iSample];
- UInt_t digiChannel = l->digiChannel[iSample]; // update this in order to consider also the group. for us the group is always 0
+ UInt_t digiChannel = l->digiChannel[iSample] + 8*digiGroup; // update this in order to consider also the group. for us the group is always 0
  UInt_t digiSampleIndex = l->digiSampleIndex[iSample];
  Float_t digiSampleValue = l->digiSampleValue[iSample];
  UInt_t digiFrequency = l->digiFrequency[iSample];
