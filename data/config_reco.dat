@@ -1,0 +1,9 @@
+######## Input Files #######
+InputFiles=516/1.root,516/2.root
+InputBranches=data/unpackBranches.dat
+######## Output File #######
+OutputFile=output.root
+OutputBranches=data/dqmBranches.dat
+####### Analysis #######
+Analysis=BaseAnalysis,PromptRecoAnalysis,DatabaseReadAnalysis
+config=DatabaseReadAnalysis databasename="sqlite://data/CeF3_H4DFall2014_analysisdb.sqlite" tablename="cef3"

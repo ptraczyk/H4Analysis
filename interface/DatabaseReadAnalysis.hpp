@@ -17,6 +17,10 @@ public:
   RunDBInterface *mydb;
   bool loaded;
 
+  // to be dynamically configured
+  string databasename;
+  string tablename;
+
 };
 
 #endif

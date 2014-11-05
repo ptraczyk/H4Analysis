@@ -4,7 +4,7 @@
 // BE SURE TO INCLUDE <mysql.h> IN YOUR SEARCH PATH
 // FOR ACLIC, EXECUTE ".include /usr/include/mysql"
 
-#include "TMySQLServer.h"
+#include "TSQLServer.h"
 #include "TSQLResult.h"
 #include "TSQLRow.h"
 #include "TMap.h"
@@ -15,12 +15,12 @@ class RunDBInterface {
 
 public:
 
-  RunDBInterface(TString address, TString database, TString table, TString user, TString password);
+  RunDBInterface(TString address, TString table, TString user, TString password);
   void LoadRun(Int_t run_number);
   TString Get(TString key);
 
   //  // EXAMPLE:
-  //  RunDBInterface *my = new RunDBInterface("mysqlserver","rundb_v2_analysis","cef3","cmsdaq_ro","....");
+  //  RunDBInterface *my = new RunDBInterface("mysql://mysqlserver/rundb_v2_analysis","cef3","cmsdaq_ro","....");
   //  my->LoadRun(462);
   //  my->GetMap()->Print();
   //  cout << "WARNING: ALL METHODS RETURN TSTRINGS, CONVERT THEM IF APPROPRIATE" << endl;
