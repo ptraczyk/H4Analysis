@@ -3,14 +3,31 @@
 #include "TMath.h"
 #include "TGraph.h"
 
+
+//#define VERBOSE_CORR1
+
 double Corr1Analysis::CorrType1(double y,TSpline *spl,TF1 *line)
 {
+	#ifdef VERBOSE_CORR1
+		cout <<"spl:"<<spl->GetName()<<" ln:"<<line->GetName()<<endl;	
+	#endif
+	if (y<TMath::Exp(2)) return y; // outside correction range 
+	if (y>TMath::Exp(9)) return y; // outside correction range
 	//Corrections are in Log/Log
 	double Y=TMath::Log(y);
+	#ifdef VERBOSE_CORR1
+		cout <<"    y:" << y<<" Y:"<<Y<<endl;
+	#endif
 	// find x tc spl(x)==y
 	double x=spl->Eval(Y);
+	#ifdef VERBOSE_CORR1
+		cout <<"    x:" << x<<" (spline inversion) "<<endl;
+	#endif
 	// y'=line(x)
 	double Y1=line->Eval(x);
+	#ifdef VERBOSE_CORR1
+		cout <<"    Y1:" << Y1<<" y'="<<TMath::Exp(Y1)<<" (line direct) "<<endl;
+	#endif
 	// return y'
 	return TMath::Exp(Y1);
 }
