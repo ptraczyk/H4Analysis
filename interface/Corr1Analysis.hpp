@@ -16,8 +16,11 @@ TFile *maxAmplFile;
 TFile *chIntFile;
 
 // this splines are inverted !!!
-vector<TSpline*> maxAmplSpls;
-vector<TSpline*> chIntSpls;
+vector<TSpline3*> maxAmplSpls;
+vector<TSpline3*> chIntSpls;
+
+vector< pair<float,float> > maxAmplSplLimits;
+vector< pair<float,float> > chIntSplLimits;
 
 vector<TF1*> maxAmplLines;
 vector<TF1*> chIntLines;
@@ -38,7 +41,8 @@ public:
 	string maxAmplFileName;
 	string chIntFileName;
 	// spl must be inverted
-	static double CorrType1(double y,TSpline *spl,TF1 *line);
+	static double CorrType1(double y,TSpline3 *spl,TF1 *line,double min,double max);
+	static double EvalSpline(double x, TSpline3 *spl,double min, double max); // use spline
 };
 
 #endif
