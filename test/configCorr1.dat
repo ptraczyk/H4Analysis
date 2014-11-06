@@ -1,5 +1,5 @@
 ######## Input Files #######
-InputBranches=test/plotBranches.dat
+InputBranches=data/dqmBranchesExtended.dat
 #include=data/physicsRuns.dat
 InputFiles=physics/output*root
 chainName=outputTree
