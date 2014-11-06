@@ -27,6 +27,7 @@ call("mkdir -p %s"%opts.dir,shell=True)
 if opts.tar:
 	cmd=["tar","-czf","%s/package.tar.gz"%opts.dir]
 	cmd.extend( glob("bin/*so" ) )
+	cmd.extend( glob("bin/tag.txt" ) )
 	cmd.extend( glob("data/*dat" ) )
 	cmd.extend( glob("data/*sqlite" ) )
 	cmd.extend( glob("data/*root" ) )

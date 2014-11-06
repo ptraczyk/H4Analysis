@@ -85,7 +85,7 @@ $(StatLib): $(BINOBJ) $(Dict)
 .PHONY: soLib
 soLib: $(SoLib)
 
-$(SoLib): $(StatLib)
+$(SoLib): $(StatLib) tag
 	$(LD) $(LDFLAGS) $(SOFLAGS) -o $@  $(BINOBJ) $(Dict)
 
 .PHONY: $(Packages) 
@@ -117,6 +117,12 @@ clean:
 ############### IMPLICIT RULES ###############
 
 
+.PHONY: tag
+tag: $(BINDIR)/tag.txt
+
+.PHONY: $(BINDIR)/tag.txt
+$(BINDIR)/tag.txt:
+	git rev-parse HEAD > $(BINDIR)/tag.txt
 
 #.o
 %.$(ObjSuf): $(BINDIR)/%.$(ObjSuf)

@@ -8,8 +8,10 @@ using namespace std;
 class OutFile{
 protected:
 	TFile *fOut;
+	void ReadTag(string fname);
 public:
 	string outFileName;
+	string tag;
 	void Init();
 	void Close();
 	OutFile(){ fOut=NULL;};

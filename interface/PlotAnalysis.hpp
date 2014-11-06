@@ -17,6 +17,11 @@ public:
 	vector<int> E;
 	void Init(LoopAndFill *l1); // { l = l1 ; };
 	void AnalyzeEvent();
+	// make the plots only for these runs. -- alternatively table position?
+	map<int,int> runs; 
+	bool isActiveRun(int run); // if empty all
+	void AddRun(int run){runs[run]=1;};
+	void AddRunRange(int run1,int run2){for(int i=run1;i<=run2;++i) AddRun(i);};
 };
 
 #endif
