@@ -11,8 +11,8 @@ double Corr1Analysis::CorrType1(double y,TSpline *spl,TF1 *line)
 	#ifdef VERBOSE_CORR1
 		cout <<"spl:"<<spl->GetName()<<" ln:"<<line->GetName()<<endl;	
 	#endif
-	if (y<TMath::Exp(2)) return y; // outside correction range 
-	if (y>TMath::Exp(9)) return y; // outside correction range
+	if (y<1) return y; // outside correction range  -- protect against 0 correction
+	//if (y>TMath::Exp(9)) return y; // outside correction range
 	//Corrections are in Log/Log
 	double Y=TMath::Log(y);
 	#ifdef VERBOSE_CORR1
@@ -48,6 +48,9 @@ void Corr1Analysis::AnalyzeEvent()
 			  chIntSpls[iCh],
 			  chIntLines[iCh]
 			  ));
+	#ifdef VERBOSE_CORR1
+		cout <<"CHINT Ch :"<<iCh<<" Before:"<< (*l->digi_charge_integrated_sub)[iCh] << " After: "<<(*l->digi_charge_integrated_corr1)[iCh]<<endl;
+	#endif
 		l->digi_max_amplitude_corr1->push_back(CorrType1(
 			(*l->digi_max_amplitude_sub)[iCh],
 			maxAmplSpls[iCh],
