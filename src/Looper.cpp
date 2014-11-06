@@ -111,5 +111,11 @@ void Looper::SetBranchesOuttree(){
 	SetBranchAddress("digi_max_amplitude_sub"	,&digi_max_amplitude_sub);
 	SetBranchAddress("digi_pedestal_sub"		,&digi_pedestal_sub);
 	SetBranchAddress("digi_pedestal_rms_sub"	,&digi_pedestal_rms_sub);
+	// CORR
+	SetBranchAddress("digi_charge_integrated_corr1"	,&digi_charge_integrated_corr1);
+	SetBranchAddress("digi_max_amplitude_corr1"	,&digi_max_amplitude_corr1);
+
+	SetBranchAddress("digi_charge_integrated_corr2"	,&digi_charge_integrated_corr2);
+	SetBranchAddress("digi_max_amplitude_corr2"	,&digi_max_amplitude_corr2);
 
 }

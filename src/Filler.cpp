@@ -239,6 +239,12 @@ void Filler::SetBranchesOuttree(){
 	SetBranchAddress("digi_max_amplitude_sub"	,&out.digi_max_amplitude_sub);
 	SetBranchAddress("digi_pedestal_sub"		,&out.digi_pedestal_sub);
 	SetBranchAddress("digi_pedestal_rms_sub"	,&out.digi_pedestal_rms_sub);
+
+	SetBranchAddress("digi_charge_integrated_corr1"	,&out.digi_charge_integrated_corr1);
+	SetBranchAddress("digi_max_amplitude_corr1"	,&out.digi_max_amplitude_corr1);
+
+	SetBranchAddress("digi_charge_integrated_corr2"	,&out.digi_charge_integrated_corr2);
+	SetBranchAddress("digi_max_amplitude_corr2"	,&out.digi_max_amplitude_corr2);
 }
 
 bool Filler::isActive(string name)

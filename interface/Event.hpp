@@ -75,7 +75,13 @@ map<string,bool> isFilled;
  	vector<float>  *digi_max_amplitude_sub ;
  	vector<float>  *digi_pedestal_sub ;
  	vector<float>  *digi_pedestal_rms_sub ;
+
+ 	vector<float>  *digi_charge_integrated_corr1 ;
+ 	vector<float>  *digi_max_amplitude_corr1 ;
 	
+ 	vector<float>  *digi_charge_integrated_corr2 ;
+ 	vector<float>  *digi_max_amplitude_corr2 ;
+
  	vector<bool>   *HODOX1    ;
  	vector<bool>   *HODOX2    ;
  	vector<bool>   *HODOY1    ;

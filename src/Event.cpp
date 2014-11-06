@@ -22,6 +22,12 @@ tree::tree(){
 	digi_max_amplitude_sub =new     vector<float> ; 
 	digi_pedestal_sub =new          vector<float> ; 
 	digi_pedestal_rms_sub =new      vector<float> ; 
+
+	digi_charge_integrated_corr1 =new vector<float> ; 
+	digi_max_amplitude_corr1 =new     vector<float> ; 
+
+	digi_charge_integrated_corr2 =new vector<float> ; 
+	digi_max_amplitude_corr2 =new     vector<float> ; 
 }
 
 tree::~tree(){
@@ -45,4 +51,10 @@ tree::~tree(){
 	delete digi_max_amplitude_sub ;
 	delete digi_pedestal_sub ;
 	delete digi_pedestal_rms_sub ;
+
+	delete digi_charge_integrated_corr1 ;
+	delete digi_max_amplitude_corr1 ;
+
+	delete digi_charge_integrated_corr2 ;
+	delete digi_max_amplitude_corr2 ;
 }

@@ -1,0 +1,13 @@
+######## Input Files #######
+InputBranches=test/plotBranches.dat
+#include=data/physicsRuns.dat
+InputFiles=physics/output*root
+chainName=outputTree
+
+######## Output File #######
+OutputBranches=data/dqmBranchesExtended.dat
+OutputFile=corr1.root
+
+####### Analysis #######
+Analysis=Corr1Analysis
+config=Corr1Analysis nChannels=4
