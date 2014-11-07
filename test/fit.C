@@ -49,14 +49,63 @@ void FitLinear(TGraph *g, int firstN,double &a,double&b, double&chidiff) // ax+b
 	cout<<"Quadratic Improvement for "<< firstN <<" is "<< prob <<"% "<<endl;
 }
 
+void GausIterate(TH1 *h,TF1*f,float z=2)
+{
+	//iterate a gaussian fit, one times in a range of sigma
+	double mean=f->GetParameter(1);
+	double sigma=f->GetParameter(2);
+	f->SetRange( mean-z*sigma,mean+z*sigma);
+	f->SetParLimits(1, mean*.75,mean*1.5);
+	f->SetParLimits(2, sigma*.5, sigma*2);
+	h->Fit(f,"WQRN");
+	h->Fit(f,"WQRNM");
+	return;
+}
+
+double GausFit(TH2D *h2, TProfile *p, double hv  )
+{
+	cout<<"[GausFit]"<<h2<<" "<<p<<" "<<hv<<endl;
+	TCanvas *c=new TCanvas(  Form("c_hv%.0lf",hv),"c");
+
+	// X = HV ; Y= adc
+	int hVBin= h2->GetXaxis()->FindBin(hv);
+	TH1D *h=h2->ProjectionY("_py", hVBin,hVBin);
+	//estimate the mean from the profile
+	double mean=p->GetBinContent(p->FindBin(hv) );
+	TF1 *gaus=new TF1("myfunc","gaus",h2->GetYaxis()->GetBinLowEdge(1), h2->GetYaxis()->GetBinLowEdge( h2->GetYaxis()->GetNbins()+1 ) );
+	// 0 is norm	
+	// mean
+	gaus->SetParameter(1,mean);
+	gaus->SetParLimits(1,mean*.75,mean*1.5);
+	//sigma
+	gaus->SetParameter(2,mean*.1);
+	gaus->SetParLimits(2,mean*.01,mean*1);
+	h->Fit(gaus,"WQN");
+	h->Fit(gaus,"WQNM");
+	// --- iterate 2s
+	 GausIterate(h,gaus,3);
+	 GausIterate(h,gaus,3);
+	 GausIterate(h,gaus,3);
+	
+	h->SetMarkerStyle(20);
+	h->DrawClone("P");
+	gaus->DrawClone("L SAME");
+	
+	return gaus->GetParameter(1);
+
+}
 
 void fit(int ch=0,const string what="chint"){
-	TFile *f=TFile::Open("plot.root");
+	//TFile *f=TFile::Open("plot.root");
+	TFile *f=TFile::Open("physics_11_6.root");
 	f->cd();
 	//string what="chint";
 	//string what="maxampl";
 	//TProfile *prof=gDirectory->Get("tprofile_chint_sub_ch0_E20");
-	TProfile *prof=gDirectory->Get(Form("tprofile_%s_sub_ch%d_E20",what.c_str(),ch));
+	TProfile *prof=(TProfile*)gDirectory->Get(Form("tprofile_%s_sub_ch%d_E20",what.c_str(),ch));
+	//th2d_chint_sub_ch0_E20
+	TH2D 	 *h2=(TH2D*)gDirectory->Get(Form("th2d_%s_sub_ch%d_E20",what.c_str(),ch));
+
 	prof->SetMarkerStyle(20);
 	TGraph *g=new TGraph();
 	g->SetName(Form("tofit_ch%d",ch));
@@ -80,8 +129,10 @@ void fit(int ch=0,const string what="chint"){
 		HV.push_back(1350);
 		HV.push_back(1400);
 	
-	//for(int i=0;i<HV.size();++i)g->SetPoint( i, HV[i], prof->GetBinContent( prof->FindBin(HV[i])) );
-	for(int i=0;i<HV.size();++i)g->SetPoint( i, TMath::Log(HV[i]), TMath::Log( prof->GetBinContent( prof->FindBin(HV[i])) ) );
+	// --- for(int i=0;i<HV.size();++i)g->SetPoint( i, HV[i], prof->GetBinContent( prof->FindBin(HV[i])) ); // NON LOG
+	//for(int i=0;i<HV.size();++i)g->SetPoint( i, TMath::Log(HV[i]), TMath::Log( prof->GetBinContent( prof->FindBin(HV[i])) ) ); // LOG-LOG, from prof
+	//FROM FIT LOG LOG
+	for(int i=0;i<HV.size() ; ++i){g->SetPoint(i, TMath::Log(HV[i]) ,TMath::Log(GausFit(h2, prof, double(HV[i]))  ) ) ;}
 	
 	g->SetMarkerStyle(20);
 	g->Draw("AP");
