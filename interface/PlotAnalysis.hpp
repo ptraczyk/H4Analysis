@@ -6,8 +6,8 @@
 
 class PlotAnalysis : public BaseAnalysis
 {
-/* Produce the profile histograms to do the subtraction
- *
+/* Produce the profile histograms to do the subtraction for Corr1. 
+ * This histograms must be fitted with test/fit.C to produce the exact files that are used
  */
 public:
 	PlotAnalysis(){};
