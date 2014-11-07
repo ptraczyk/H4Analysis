@@ -7,6 +7,8 @@
 #include "TFile.h"
 #include "TMath.h"
 #include "TCanvas.h"
+#include "TLatex.h"
+
 #include <vector>
 
 using namespace std;
@@ -42,7 +44,7 @@ void FitLinear(TGraph *g, int firstN,double &a,double&b, double&chidiff) // ax+b
 	double p1=firstN-2;
 	double p2=firstN-3;
 	double f =  ((chi2 - chi2_2)/(p1-p2)  )/ ( chi2_2/ (firstN-p2));
-	prob=0;
+	double prob=0;
 	if (chi2_2 == 0 ) return;
 	cout<<"Debug Line:"<<firstN<<":"<<chi2<<":"<<chi2_2<<":"<<p1<<":"<<p2<<"|"<<f<<endl;
 	prob= (1.-TMath::FDistI(f,p1-p2,firstN-p2) )*100;
@@ -70,6 +72,7 @@ double GausFit(TH2D *h2, TProfile *p, double hv  )
 	// X = HV ; Y= adc
 	int hVBin= h2->GetXaxis()->FindBin(hv);
 	TH1D *h=h2->ProjectionY("_py", hVBin,hVBin);
+		if(hv>800)h->Rebin(4);//5000->1250
 	//estimate the mean from the profile
 	double mean=p->GetBinContent(p->FindBin(hv) );
 	TF1 *gaus=new TF1("myfunc","gaus",h2->GetYaxis()->GetBinLowEdge(1), h2->GetYaxis()->GetBinLowEdge( h2->GetYaxis()->GetNbins()+1 ) );
@@ -84,12 +87,13 @@ double GausFit(TH2D *h2, TProfile *p, double hv  )
 	h->Fit(gaus,"WQNM");
 	// --- iterate 2s
 	 GausIterate(h,gaus,3);
-	 GausIterate(h,gaus,3);
-	 GausIterate(h,gaus,3);
+	 GausIterate(h,gaus,2);
+	 GausIterate(h,gaus,1);
 	
 	h->SetMarkerStyle(20);
 	h->DrawClone("P");
 	gaus->DrawClone("L SAME");
+	TLatex *l=new TLatex(); l->SetNDC(); l->DrawLatex( .8,.8,Form("HV=%.0f",hv));
 	
 	return gaus->GetParameter(1);
 
@@ -97,7 +101,7 @@ double GausFit(TH2D *h2, TProfile *p, double hv  )
 
 void fit(int ch=0,const string what="chint"){
 	//TFile *f=TFile::Open("plot.root");
-	TFile *f=TFile::Open("physics_11_6.root");
+	TFile *f=TFile::Open("plot_11_6.root");
 	f->cd();
 	//string what="chint";
 	//string what="maxampl";
@@ -118,7 +122,7 @@ void fit(int ch=0,const string what="chint"){
 		HV.push_back(800);
 		HV.push_back(850);
 		HV.push_back(900);
-		HV.push_back(950);
+		if(what != "chint" && what != "maxampl")HV.push_back(950); // double peak, to investigate, probably playing w/ something
 		HV.push_back(1000);
 		HV.push_back(1050);
 		HV.push_back(1100);
@@ -187,4 +191,16 @@ void fit(int ch=0,const string what="chint"){
 	c->ls();
 
 
+}
+
+void seq(){
+	gROOT->SetBatch();
+	fit(0,"maxampl");
+	fit(1,"maxampl");
+	fit(2,"maxampl");
+	fit(3,"maxampl");
+	fit(0,"chint");
+	fit(1,"chint");
+	fit(2,"chint");
+	fit(3,"chint");
 }
