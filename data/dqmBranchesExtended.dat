@@ -43,3 +43,6 @@ digi_pedestal_rms_sub
 digi_charge_integrated_corr1
 digi_max_amplitude_corr1
 
+digi_charge_integrated_corr2
+digi_max_amplitude_corr2
+
