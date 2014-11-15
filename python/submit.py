@@ -23,6 +23,8 @@ config=ParseInputFile(opts.input)
 
 call("[ -d %s ] && rm -r %s"%(opts.dir,opts.dir),shell=True)
 call("mkdir -p %s"%opts.dir,shell=True)
+cmdFile=open("%s/submit_cmd.sh"%opts.dir,"w")
+cmdFile.write("##Commands used to submit on batch. Automatic written by python/submit.py script\n")
 
 if opts.tar:
 	cmd=["tar","-czf","%s/package.tar.gz"%opts.dir]
@@ -92,6 +94,7 @@ for iJob in range(0,opts.njobs):
 	cmd=["qsub","-b","y","-q",opts.queue,"-o","%s/log%d.txt"%(basedir,iJob),"-e","%s/log%d.txt"%(basedir,iJob),"%s/sub%d.sh"%(basedir,iJob)]
 	cmdline=' '.join(cmd)
 	print cmdline
+	cmdFile.write(cmdline+"\n")
 	if not opts.dryrun: 
 		call(cmdline,shell=True)
 
