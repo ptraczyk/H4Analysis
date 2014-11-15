@@ -89,7 +89,7 @@ for iJob in range(0,opts.njobs):
 	call(["chmod","u+x","%s/sub%d.sh"%(opts.dir,iJob)])
 	
 	## submit
-	cmd=["qsub","-b","y","-o","%s/log%d.txt"%(basedir,iJob),"-e","%s/log%d.txt"%(basedir,iJob),"%s/sub%d.sh"%(basedir,iJob)]
+	cmd=["qsub","-b","y","-q",opts.queue,"-o","%s/log%d.txt"%(basedir,iJob),"-e","%s/log%d.txt"%(basedir,iJob),"%s/sub%d.sh"%(basedir,iJob)]
 	cmdline=' '.join(cmd)
 	print cmdline
 	if not opts.dryrun: 

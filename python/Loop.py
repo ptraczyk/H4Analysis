@@ -103,6 +103,7 @@ print "    Looper   "
 print "------------------------"
 print "CpuTime:",l.CpuTime()
 print "RealTime:",l.RealTime()
+print "Nentries:",l.GetEntries()
 print "------------------------"
 for i in range(0,len(analysis)):
 	print "    %s   " %config["Analysis"][i]
