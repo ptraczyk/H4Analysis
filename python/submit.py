@@ -15,6 +15,8 @@ parser.add_option("-n","--njobs" ,dest='njobs',type='int',help="Number of Job to
 parser.add_option("-q","--queue" ,dest='queue',type='string',help="Queue",default="short.q")
 parser.add_option("-t","--no-tar" ,dest='tar',action='store_false',help="Do not Make Tar",default=True)
 parser.add_option("","--dryrun" ,dest='dryrun',action='store_true',help="Do not Submit",default=False)
+parser.add_option("","--no-compress" ,dest='compress',action='store_false',help="Don't compress",default=True)
+parser.add_option("","--compress"    ,dest='compress',action='store_true',help="Compress stdout/err")
 (opts,args)=parser.parse_args()
 
 # import Parser
@@ -73,8 +75,14 @@ for iJob in range(0,opts.njobs):
 		sh.write("mkdir -p %s\n"%opts.dir)
 		sh.write("cp %s/*dat %s/\n"%(basedir,opts.dir))
 	sh.write('touch %s/sub%d.run\n'%(basedir,iJob))
-	sh.write('python python/Loop.py --input=%s/input%d.dat --debug 3\n'%(opts.dir,iJob))
-	sh.write('EXITCODE=$?\n')
+	if opts.compress:
+		compressString="2>&1 | gzip > %s/log%d.txt.gz"%(opts.dir,iJob)
+	else: compressString =""
+	sh.write('python python/Loop.py --input=%s/input%d.dat --debug 3 %s\n'%(opts.dir,iJob,compressString))
+	if opts.compress:
+		sh.write('EXITCODE=${PIPESTATUS[0]}\n')
+	else:
+		sh.write('EXITCODE=$?\n')
 	sh.write('rm %s/sub%d.run\n'%(basedir,iJob))
 	sh.write('[ $EXITCODE == 0 ] && touch %s/sub%d.done\n'%(basedir,iJob))
 	sh.write('[ $EXITCODE != 0 ] && touch %s/sub%d.fail\n'%(basedir,iJob))
