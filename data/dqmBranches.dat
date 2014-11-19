@@ -26,3 +26,13 @@ digiChannel
 digiSampleIndex
 digiSampleValue
 digiBoard
+digi_SeePulse_Index
+digi_SeePulse_Value
+digi_Mib2Pulse_Index
+digi_Mib2Pulse_Value
+digi_Mib3Pulse_Index
+digi_Mib3Pulse_Value
+digi_Zstak1Pulse_Index
+digi_Zstak1Pulse_Value
+digi_Zstak2Pulse_Index
+digi_Zstak2Pulse_Value
