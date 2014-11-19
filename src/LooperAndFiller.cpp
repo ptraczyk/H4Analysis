@@ -81,6 +81,16 @@ void LoopAndFill::Fill(){
  	CopyVector(TDCreco               ,out.TDCreco);
  	CopyVector(digi_charge_integrated,out.digi_charge_integrated);
  	CopyVector(digi_max_amplitude    ,out.digi_max_amplitude);
+ 	CopyVector(digi_SeePulse_Index   ,out.digi_SeePulse_Index);
+ 	CopyVector(digi_SeePulse_Value   ,out.digi_SeePulse_Value);
+ 	CopyVector(digi_Mib2Pulse_Index  ,out.digi_Mib2Pulse_Index);
+ 	CopyVector(digi_Mib2Pulse_Value  ,out.digi_Mib2Pulse_Value);
+ 	CopyVector(digi_Mib3Pulse_Index  ,out.digi_Mib3Pulse_Index);
+ 	CopyVector(digi_Mib3Pulse_Value  ,out.digi_Mib3Pulse_Value);
+ 	CopyVector(digi_Zstak1Pulse_Index,out.digi_Zstak1Pulse_Index);
+ 	CopyVector(digi_Zstak1Pulse_Value,out.digi_Zstak1Pulse_Value);
+ 	CopyVector(digi_Zstak2Pulse_Index,out.digi_Zstak2Pulse_Index);
+ 	CopyVector(digi_Zstak2Pulse_Value,out.digi_Zstak2Pulse_Value);
  	CopyVector(digi_pedestal         ,out.digi_pedestal);
  	CopyVector(digi_pedestal_rms     ,out.digi_pedestal_rms);
  	CopyVector(digi_time_at_frac30   ,out.digi_time_at_frac30);

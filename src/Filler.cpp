@@ -217,6 +217,16 @@ void Filler::SetBranchesOuttree(){
 	SetBranchAddress("TDCreco"	,&out.TDCreco  );
 	SetBranchAddress("digi_charge_integrated"	,&out.digi_charge_integrated);
 	SetBranchAddress("digi_max_amplitude"		,&out.digi_max_amplitude);
+	SetBranchAddress("digi_SeePulse_Index"		,&out.digi_SeePulse_Index);
+	SetBranchAddress("digi_SeePulse_Value"		,&out.digi_SeePulse_Value);
+	SetBranchAddress("digi_Mib2Pulse_Index"		,&out.digi_Mib2Pulse_Index);
+	SetBranchAddress("digi_Mib2Pulse_Value"		,&out.digi_Mib2Pulse_Value);
+	SetBranchAddress("digi_Mib3Pulse_Index"		,&out.digi_Mib3Pulse_Index);
+	SetBranchAddress("digi_Mib3Pulse_Value"		,&out.digi_Mib3Pulse_Value);
+	SetBranchAddress("digi_Zstak1Pulse_Index"		,&out.digi_Zstak1Pulse_Index);
+	SetBranchAddress("digi_Zstak1Pulse_Value"		,&out.digi_Zstak1Pulse_Value);
+	SetBranchAddress("digi_Zstak2Pulse_Index"		,&out.digi_Zstak2Pulse_Index);
+	SetBranchAddress("digi_Zstak2Pulse_Value"		,&out.digi_Zstak2Pulse_Value);
 	SetBranchAddress("digi_pedestal"		,&out.digi_pedestal);
 	SetBranchAddress("digi_pedestal_rms"		,&out.digi_pedestal_rms);
 	SetBranchAddress("digi_time_at_frac30"		,&out.digi_time_at_frac30);
