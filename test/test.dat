@@ -1,0 +1,23 @@
+######## Input Files #######
+InputBranches=data/unpackBranches.dat
+#include=data/physicsRuns.dat
+
+InputRuns=root://eoscms//eos/cms/store/caf/user/lpernie/H4_cmsdaqtb_data_H4Fall2014_RAW_MERGED/%%RUN%%/RAW_MERGED_1.root 738
+
+######## Output File #######
+OutputBranches=data/dqmBranchesExtended.dat
+OutputFile=test.root
+
+####### Analysis #######
+Analysis=mcpAnalysis
+#PromptRecoAnalysis,SimpleAnalysis,PlotAnalysis,Corr1Analysis
+#
+config=DatabaseReadAnalysis databasename="sqlite://data/CeF3_H4DFall2014_analysisdb.sqlite" tablename="cef3"
+#
+config=PedSubAnalysis pedestalFileName="data/pedestal.root" nChannels=4 HV.push_back(650) HV.push_back(700) HV.push_back(950) HV.push_back(600)
+#
+config=SimpleAnalysis nChannels=4 inputType=1
+#
+config=PlotAnalysis nChannels=4 E.push_back(10) E.push_back(15) E.push_back(20) E.push_back(50) E.push_back(100) E.push_back(150) E.push_back(200)
+#
+config=Corr1Analysis nChannels=4
