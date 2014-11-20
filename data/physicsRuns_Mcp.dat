@@ -3,5 +3,5 @@
 
 
 #InputRuns=root://eoscms//eos/cms/store/caf/user/lpernie/H4_cmsdaqtb_data_H4Fall2014_DQM_MERGED/%%RUN%%/DQM_RECO.root 738,739,740,741,742,743,744,745,746,747,748
-InputRuns=root://eoscms//eos/cms/store/caf/user/lpernie/H4_cmsdaqtb_data_H4Fall2014_RAW_MERGED/%%RUN%%/RAW_MERGED_1.root 738
-#InputRuns=root://eoscms//eos/cms/store/caf/user/lpernie/H4_cmsdaqtb_data_H4Fall2014_RAW_MERGED/%%RUN%%/RAW_MERGED_1.root 738,739,740,741,742,743,744,745,746,747,748
+#InputRuns=root://eoscms//eos/cms/store/caf/user/lpernie/H4_cmsdaqtb_data_H4Fall2014_RAW_MERGED/%%RUN%%/RAW_MERGED_1.root 738
+InputRuns=root://eoscms//eos/cms/store/caf/user/lpernie/H4_cmsdaqtb_data_H4Fall2014_RAW_MERGED/%%RUN%%/RAW_MERGED_1.root 738,739,740,741,742,743,744,745,746,747,748
