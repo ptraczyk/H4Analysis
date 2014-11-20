@@ -44,7 +44,7 @@ void Mcp_Plotter( TString InputFile = "../output.root", TString OutPutFolder = "
   cout<<"Let's start to do some cool plots!"<<endl;
   MCP_Pos MCP_info;
   InitMCP_Pos( MCP_info );
-  cout<<"Test: "<<MCP_info.SEE.pos[738]<<" "<<MCP_info.Z1.pos[738]<<" "<<MCP_info.MIB2.pos[738]<<endl;
+  //cout<<"Test: "<<MCP_info.SEE.pos[738]<<" "<<MCP_info.Z1.pos[738]<<" "<<MCP_info.MIB2.pos[738]<<endl;
   //Parameters---------------------------------------------------
   bool debug=false;
   int Nplots_single = 8.; //Numbers of first events on which you want a plot

@@ -25,7 +25,7 @@ struct MCP_Pos{//It countain all the informations of the RUN on all the MCPs
 };
 
 
-void InitMCP_Pos( MCP_Pos a ){
+void InitMCP_Pos( MCP_Pos &a ){
 
   int RUN_List[11]={738,739,740,741,742,743,744,745,746,747,748};
   for(int i=0; i<11; i++){
