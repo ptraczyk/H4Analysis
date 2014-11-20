@@ -25,6 +25,7 @@
 #include "TGraphAsymmErrors.h"
 #include "TFitter.h"
 #include "tdrStyle.C"
+#include "Mcp_Plotter.h"
 
 #define LIGHT 299.792458
 #define NSTEPMAX 10000
@@ -41,6 +42,9 @@ void deleteTimeLayerPlot(TH1F **h, int size);
 void Mcp_Plotter( TString InputFile = "../output.root", TString OutPutFolder = "my_plots" ){
   //Initial Messages
   cout<<"Let's start to do some cool plots!"<<endl;
+  MCP_Pos MCP_info;
+  InitMCP_Pos( MCP_info );
+  cout<<"Test: "<<MCP_info.SEE.pos[738]<<" "<<MCP_info.Z1.pos[738]<<" "<<MCP_info.MIB2.pos[738]<<endl;
   //Parameters---------------------------------------------------
   bool debug=false;
   int Nplots_single = 8.; //Numbers of first events on which you want a plot
