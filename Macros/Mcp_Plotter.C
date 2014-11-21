@@ -81,20 +81,23 @@ void Mcp_Plotter( TString InputFile = "../output.root", TString OutPutFolder = "
   Tree->SetBranchAddress( "digi_Zstak2Pulse_Index", &digi_Zstak2Pulse_Index);
   Tree->SetBranchAddress( "digi_Zstak2Pulse_Value", &digi_Zstak2Pulse_Value);
 
+  double res_range = 20;
+  int res_bins = 2*res_range+1;
+
   //Single events plots
   TH1F *h_Shape_See, *h_Shape_Mib2, *h_Shape_Mib3, *h_Shape_Z1, *h_Shape_Z2; 
   //Plots on All events
   TH1F *nEv             = new TH1F("nEv","N events, Selec", 3, -0.5, 1.5); nEv->GetXaxis()->SetTitle("#Ev");
-  TH1F *Res_SeeMib2     = new TH1F("Res_SeeMib2","Resolution See Mib2", 20, -10., 10.); Res_SeeMib2->GetXaxis()->SetTitle("Index1 - Index2");
-  TH1F *Res_SeeMib3     = new TH1F("Res_SeeMib3","Resolution See Mib3", 20, -10., 10.); Res_SeeMib3->GetXaxis()->SetTitle("Index1 - Index2");
-  TH1F *Res_SeeZ1       = new TH1F("Res_SeeZ1","Resolution See Z1", 20, -10., 10.); Res_SeeZ1->GetXaxis()->SetTitle("Index1 - Index2");
-  TH1F *Res_SeeZ2       = new TH1F("Res_SeeZ2","Resolution See Z2", 20, -10., 10.); Res_SeeZ2->GetXaxis()->SetTitle("Index1 - Index2");
-  TH1F *Res_Mib2Mib3    = new TH1F("Res_Mib2Mib3","Resolution Mib2 Mib3", 20, -10., 10.); Res_Mib2Mib3->GetXaxis()->SetTitle("Index1 - Index2");
-  TH1F *Res_Mib2Z1      = new TH1F("Res_Mib2Z1","Resolution Mib2 Z1", 20, -10., 10.); Res_Mib2Z1->GetXaxis()->SetTitle("Index1 - Index2");
-  TH1F *Res_Mib2Z2      = new TH1F("Res_Mib2Z2","Resolution Mib2 Z2", 20, -10., 10.); Res_Mib2Z2->GetXaxis()->SetTitle("Index1 - Index2");
-  TH1F *Res_Mib3Z1      = new TH1F("Res_Mib3Z1","Resolution Mib3 Z1", 20, -10., 10.); Res_Mib3Z1->GetXaxis()->SetTitle("Index1 - Index2");
-  TH1F *Res_Mib3Z2      = new TH1F("Res_Mib3Z2","Resolution Mib3 Z2", 20, -10., 10.); Res_Mib3Z2->GetXaxis()->SetTitle("Index1 - Index2");
-  TH1F *Res_Z1Z2        = new TH1F("Res_Z1Z2","Resolution Z1 Z2", 20, -10., 10.); Res_Z1Z2->GetXaxis()->SetTitle("Index1 - Index2");
+  TH1F *Res_SeeMib2     = new TH1F("Res_SeeMib2","Resolution See Mib2", res_bins, -res_range, res_range); Res_SeeMib2->GetXaxis()->SetTitle("Index1 - Index2");
+  TH1F *Res_SeeMib3     = new TH1F("Res_SeeMib3","Resolution See Mib3", res_bins, -res_range, res_range); Res_SeeMib3->GetXaxis()->SetTitle("Index1 - Index2");
+  TH1F *Res_SeeZ1       = new TH1F("Res_SeeZ1","Resolution See Z1", res_bins, -res_range, res_range); Res_SeeZ1->GetXaxis()->SetTitle("Index1 - Index2");
+  TH1F *Res_SeeZ2       = new TH1F("Res_SeeZ2","Resolution See Z2", res_bins, -res_range, res_range); Res_SeeZ2->GetXaxis()->SetTitle("Index1 - Index2");
+  TH1F *Res_Mib2Mib3    = new TH1F("Res_Mib2Mib3","Resolution Mib2 Mib3", res_bins, -res_range, res_range); Res_Mib2Mib3->GetXaxis()->SetTitle("Index1 - Index2");
+  TH1F *Res_Mib2Z1      = new TH1F("Res_Mib2Z1","Resolution Mib2 Z1", res_bins, -res_range, res_range); Res_Mib2Z1->GetXaxis()->SetTitle("Index1 - Index2");
+  TH1F *Res_Mib2Z2      = new TH1F("Res_Mib2Z2","Resolution Mib2 Z2", res_bins, -res_range, res_range); Res_Mib2Z2->GetXaxis()->SetTitle("Index1 - Index2");
+  TH1F *Res_Mib3Z1      = new TH1F("Res_Mib3Z1","Resolution Mib3 Z1", res_bins, -res_range, res_range); Res_Mib3Z1->GetXaxis()->SetTitle("Index1 - Index2");
+  TH1F *Res_Mib3Z2      = new TH1F("Res_Mib3Z2","Resolution Mib3 Z2", res_bins, -res_range, res_range); Res_Mib3Z2->GetXaxis()->SetTitle("Index1 - Index2");
+  TH1F *Res_Z1Z2        = new TH1F("Res_Z1Z2","Resolution Z1 Z2", res_bins, -res_range, res_range); Res_Z1Z2->GetXaxis()->SetTitle("Index1 - Index2");
   myc1->cd();
 
   //LOOP-------
@@ -118,32 +121,37 @@ void Mcp_Plotter( TString InputFile = "../output.root", TString OutPutFolder = "
     for(unsigned int i=0; i<digi_Zstak1Pulse_Index->size(); i++){ if( digi_Zstak1Pulse_Value->at(i)>2000 ) h_Shape_Z1->SetBinContent( digi_Zstak1Pulse_Index->at(i), digi_Zstak1Pulse_Value->at(i) );}
     for(unsigned int i=0; i<digi_Zstak2Pulse_Index->size(); i++){ if( digi_Zstak2Pulse_Value->at(i)>2000 ) h_Shape_Z2->SetBinContent( digi_Zstak2Pulse_Index->at(i), digi_Zstak2Pulse_Value->at(i) );}
     DummyTimeSee  = ExtractDummyTime(h_Shape_See);
-    DummyTimeMib2 = ExtractDummyTime(h_Shape_Mib2);  DummyTimeMib3 = ExtractDummyTime(h_Shape_Mib3);
-    DummyTimeZ1   = ExtractDummyTime(h_Shape_Z1); DummyTimeZ2   = ExtractDummyTime(h_Shape_Z2);
+    DummyTimeMib2 = ExtractDummyTime(h_Shape_Mib2);  
+    DummyTimeMib3 = ExtractDummyTime(h_Shape_Mib3);
+    DummyTimeZ1   = ExtractDummyTime(h_Shape_Z1); 
+    DummyTimeZ2   = ExtractDummyTime(h_Shape_Z2);
+    
     //Reslution
-    Res_SeeMib2->Fill( DummyTimeSee-DummyTimeMib2 );
-    Res_SeeMib3->Fill( DummyTimeSee-DummyTimeMib3 );
-    Res_SeeZ1->Fill( DummyTimeSee-DummyTimeZ1 );
-    Res_SeeZ2->Fill( DummyTimeSee-DummyTimeZ2 );
-    Res_Mib2Mib3->Fill( DummyTimeMib2-DummyTimeMib3 );
-    Res_Mib2Z1->Fill( DummyTimeMib2-DummyTimeZ1 );
-    Res_Mib2Z2->Fill( DummyTimeMib2-DummyTimeZ2 );
-    Res_Mib3Z1->Fill( DummyTimeMib3-DummyTimeZ1 );
-    Res_Mib3Z2->Fill( DummyTimeMib3-DummyTimeZ2 );
-    Res_Z1Z2->Fill( DummyTimeZ1-DummyTimeZ2 );
+    if (DummyTimeSee && DummyTimeMib2) Res_SeeMib2->Fill( DummyTimeSee-DummyTimeMib2 );
+    if (DummyTimeSee && DummyTimeMib3) Res_SeeMib3->Fill( DummyTimeSee-DummyTimeMib3 );
+    if (DummyTimeSee && DummyTimeZ1) Res_SeeZ1->Fill( DummyTimeSee-DummyTimeZ1 );
+    if (DummyTimeSee && DummyTimeZ2) Res_SeeZ2->Fill( DummyTimeSee-DummyTimeZ2 );
+    if (DummyTimeMib2 && DummyTimeMib3) Res_Mib2Mib3->Fill( DummyTimeMib2-DummyTimeMib3 );
+    if (DummyTimeMib2 && DummyTimeZ1) Res_Mib2Z1->Fill( DummyTimeMib2-DummyTimeZ1 );
+    if (DummyTimeMib2 && DummyTimeZ2) Res_Mib2Z2->Fill( DummyTimeMib2-DummyTimeZ2 );
+    if (DummyTimeMib3 && DummyTimeZ1) Res_Mib3Z1->Fill( DummyTimeMib3-DummyTimeZ1 );
+    if (DummyTimeMib3 && DummyTimeZ2) Res_Mib3Z2->Fill( DummyTimeMib3-DummyTimeZ2 );
+    if (DummyTimeZ1 && DummyTimeZ2) Res_Z1Z2->Fill( DummyTimeZ1-DummyTimeZ2 );
+    
     //Drawning Single Event Histos
     if( iEntry < Nplots_single ){
 	TLatex latex; latex.SetTextSize(0.04); latex.SetNDC(); latex.SetTextAlign(13);
-	char line[20]; sprintf(line,"Minimum is: %d", DummyTimeSee ); 
-	h_Shape_See->Draw();  latex.DrawLatex(.7,.7,line); TString out = OutPutFolder + "/SingleEvents/PulseShape_See_"+ ss.str() +".png"; myc1->SaveAs( out.Data() );
-	sprintf(line,"Minimum is: %d", DummyTimeMib2 ); 
-	h_Shape_Mib2->Draw(); latex.DrawLatex(.7,.7,line); out = OutPutFolder + "/SingleEvents/PulseShape_Mib2_"+ ss.str() +".png"; myc1->SaveAs( out.Data() ); 
-	sprintf(line,"Minimum is: %d", DummyTimeMib3 ); 
-	h_Shape_Mib3->Draw(); latex.DrawLatex(.7,.7,line); out = OutPutFolder + "/SingleEvents/PulseShape_Mib3_"+ ss.str() +".png"; myc1->SaveAs( out.Data() ); 
-	sprintf(line,"Minimum is: %d", DummyTimeZ1 ); 
-	h_Shape_Z1->Draw();   latex.DrawLatex(.7,.7,line); out = OutPutFolder + "/SingleEvents/PulseShape_Z1_"+ ss.str() +".png"; myc1->SaveAs( out.Data() );
-	sprintf(line,"Minimum is: %d", DummyTimeZ2 ); 
-	h_Shape_Z2->Draw();   latex.DrawLatex(.7,.7,line); out = OutPutFolder + "/SingleEvents/PulseShape_Z2_"+ ss.str() +".png"; myc1->SaveAs( out.Data() );
+	char line[20]; 
+	sprintf(line,"Minimum in bin %d", DummyTimeSee ); 
+	h_Shape_See->Draw();  latex.DrawLatex(.6,.7,line); TString out = OutPutFolder + "/SingleEvents/PulseShape_See_"+ ss.str() +".png"; myc1->SaveAs( out.Data() );
+	sprintf(line,"Minimum in bin %d", DummyTimeMib2 ); 
+	h_Shape_Mib2->Draw(); latex.DrawLatex(.6,.7,line); out = OutPutFolder + "/SingleEvents/PulseShape_Mib2_"+ ss.str() +".png"; myc1->SaveAs( out.Data() ); 
+	sprintf(line,"Minimum in bin %d", DummyTimeMib3 ); 
+	h_Shape_Mib3->Draw(); latex.DrawLatex(.6,.7,line); out = OutPutFolder + "/SingleEvents/PulseShape_Mib3_"+ ss.str() +".png"; myc1->SaveAs( out.Data() ); 
+	sprintf(line,"Minimum in bin %d", DummyTimeZ1 ); 
+	h_Shape_Z1->Draw();   latex.DrawLatex(.6,.7,line); out = OutPutFolder + "/SingleEvents/PulseShape_Z1_"+ ss.str() +".png"; myc1->SaveAs( out.Data() );
+	sprintf(line,"Minimum in bin %d", DummyTimeZ2 ); 
+	h_Shape_Z2->Draw();   latex.DrawLatex(.6,.7,line); out = OutPutFolder + "/SingleEvents/PulseShape_Z2_"+ ss.str() +".png"; myc1->SaveAs( out.Data() );
     }
     delete h_Shape_See; delete h_Shape_Mib2; delete h_Shape_Mib3; delete h_Shape_Z1; delete h_Shape_Z2;
   }//All Entries
@@ -216,12 +224,16 @@ void deleteTimeLayerPlot(TH1F **h, int size){
 }
 
 int ExtractDummyTime(TH1F *h_Shape){
-  double Minimum = 99999.;
+  double Minimum = 99999., Maximum = 0.;
   int    MinimumBin = -1;
   int BinMin(50), BinMax(500);
   for( int i=BinMin; i<BinMax; i++){
     double Cont = h_Shape->GetBinContent( i );
     if( Cont < Minimum ){ Minimum = Cont; MinimumBin = i; }
+    if( Cont > Maximum ) Maximum = Cont; 
   }
+  
+  if (Maximum-Minimum<100) MinimumBin=0;
+  
   return MinimumBin;
 }
